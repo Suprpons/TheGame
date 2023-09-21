@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://bi0whlj2sb74h"]
+
+[ext_resource type="Script" path="res://pers.gd" id="1_hw5xl"]
+[ext_resource type="Texture2D" uid="uid://bcmmmruq1lx4b" path="res://Screenshot_2023-9-10_205626109.png" id="2_ngwtb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ppwb"]
+size = Vector2(16, 5)
+
+[sub_resource type="Animation" id="Animation_di8sx"]
+resource_name = "stand"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.5, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [1, 69, 71]
+}
+
+[sub_resource type="Animation" id="Animation_t85kj"]
+resource_name = "right"
+length = 1.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.4, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 25]
+}
+
+[sub_resource type="Animation" id="Animation_mwmon"]
+resource_name = "down"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.4, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_khq6a"]
+resource_name = "up"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.4, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 37]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ybmb6"]
+_data = {
+"down": SubResource("Animation_mwmon"),
+"right": SubResource("Animation_t85kj"),
+"stand": SubResource("Animation_di8sx"),
+"up": SubResource("Animation_khq6a")
+}
+
+[node name="Pers" type="CharacterBody2D"]
+y_sort_enabled = true
+position = Vector2(0, -24)
+script = ExtResource("1_hw5xl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 23)
+shape = SubResource("RectangleShape2D_3ppwb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+scale = Vector2(0.64, 0.6)
+texture = ExtResource("2_ngwtb")
+hframes = 12
+vframes = 8
+frame = 69
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_ybmb6")
+}
