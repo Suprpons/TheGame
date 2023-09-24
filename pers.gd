@@ -4,7 +4,7 @@ extends CharacterBody2D
 var speed = 100  # speed in pixels/sec
 @onready var ap = $AnimationPlayer
 @onready var sp = $Sprite2D
-@onready var att = $"../AudioStreamPlayer"
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,7 +13,7 @@ func _ready():
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
   var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
   velocity = direction * speed
   var x = direction.x
@@ -28,6 +28,6 @@ func _physics_process(delta):
     ap.play("down")
   if direction.y < 0:
     ap.play("up")
-  if x == 0 and y == 0:
+  if direction.x == 0 and direction.y == 0:
     ap.play("stand")
   move_and_slide();
