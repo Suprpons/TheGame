@@ -6,9 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ppwb"]
 size = Vector2(16, 5)
 
-[sub_resource type="Animation" id="Animation_di8sx"]
-resource_name = "stand"
-length = 1.5
+[sub_resource type="Animation" id="Animation_mwmon"]
+resource_name = "down"
+length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -17,10 +17,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.5, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0.1, 0.4, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [1, 69, 71]
+"values": [1, 0, 1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_t85kj"]
@@ -40,9 +40,9 @@ tracks/0/keys = {
 "values": [24, 25, 26, 25]
 }
 
-[sub_resource type="Animation" id="Animation_mwmon"]
-resource_name = "down"
-length = 1.2
+[sub_resource type="Animation" id="Animation_di8sx"]
+resource_name = "stand"
+length = 1.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -51,10 +51,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.4, 0.7, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0.1, 0.5, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [1, 0, 1, 2]
+"values": [1, 69, 71]
 }
 
 [sub_resource type="Animation" id="Animation_khq6a"]
