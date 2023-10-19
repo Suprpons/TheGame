@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyrdw7vyscdmo"
-path="res://.godot/imported/NPC.png-fd46a2f37120c360e1f6bcb88dab6b32.ctex"
+uid="uid://d2hy7wl46ki5j"
+path="res://.godot/imported/field_selected_background.png-90aa3ed4a408051eb67079e97ad3778a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://NPC.png"
-dest_files=["res://.godot/imported/NPC.png-fd46a2f37120c360e1f6bcb88dab6b32.ctex"]
+source_file="res://images/field_selected_background.png"
+dest_files=["res://.godot/imported/field_selected_background.png-90aa3ed4a408051eb67079e97ad3778a.ctex"]
 
 [params]
 

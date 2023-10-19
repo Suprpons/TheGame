@@ -1,11 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4q85tg50lb5n"]
+[gd_scene load_steps=17 format=3 uid="uid://b4q85tg50lb5n"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_sie2j"]
+[ext_resource type="Texture2D" uid="uid://cqcqf2kp1sx1" path="res://tilesets/tileset_grassland.png" id="2_kc3mc"]
 [ext_resource type="PackedScene" uid="uid://bi0whlj2sb74h" path="res://pers.tscn" id="2_s275l"]
-[ext_resource type="Texture2D" uid="uid://cqcqf2kp1sx1" path="res://tileset_grassland.png" id="3_vlad2"]
+[ext_resource type="PackedScene" uid="uid://0280edgu5vxe" path="res://houses.tscn" id="3_sj2ht"]
+[ext_resource type="PackedScene" uid="uid://bd5ahwjcg24tf" path="res://vrag.tscn" id="4_xs1u7"]
+[ext_resource type="Texture2D" uid="uid://dsqnv7hxxayak" path="res://ITEMs/Key.png" id="5_uuri6"]
+[ext_resource type="Script" path="res://addons/gloot/core/inventory.gd" id="6_88ls3"]
+[ext_resource type="Script" path="res://addons/gloot/core/item_protoset.gd" id="7_j16qe"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory.gd" id="8_pfxv0"]
+[ext_resource type="Texture2D" uid="uid://b2hkcwwq10cut" path="res://icon.png" id="9_yxk7s"]
+[ext_resource type="Texture2D" uid="uid://baos55277liol" path="res://ITEMs/healpotion.png" id="10_gl0wy"]
+[ext_resource type="Texture2D" uid="uid://dkurp6xhc4dte" path="res://ITEMs/NewSprite68.png" id="11_sjcbq"]
+[ext_resource type="Texture2D" uid="uid://dpjfm86nkihhx" path="res://ITEMs/NewSprite321.png" id="12_32bro"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w5fvk"]
-texture = ExtResource("3_vlad2")
+texture = ExtResource("2_kc3mc")
 8:2/size_in_atlas = Vector2i(2, 3)
 8:2/0 = 0
 8:2/0/y_sort_origin = 18
@@ -442,6 +452,30 @@ texture = ExtResource("3_vlad2")
 physics_layer_0/collision_layer = 8
 sources/0 = SubResource("TileSetAtlasSource_w5fvk")
 
+[sub_resource type="Resource" id="Resource_k1g2k"]
+script = ExtResource("7_j16qe")
+json_data = "[{
+\"id\":  \"building\"
+},
+{
+\"id\": \"key\",
+\"image\": \"res://ITEMs/Key.png\",
+\"stack_size_max\": 2
+},
+{
+\"id\": \"HPotion\",
+\"image\": \"res://ITEMs/healpotion.png\"
+},
+{
+\"id\": \"HPotions\",
+\"image\": \"res://ITEMs/NewSprite68.png\"
+},
+{
+\"id\": \"sword\",
+\"image\": \"res://ITEMs/NewSprite321.png\"
+},
+]"
+
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_sie2j")
@@ -460,15 +494,57 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(851995, 524288, 0, 524344, 524288, 0, 1507382, 524288, 0, 1441802, 524288, 0, 2293792, 524288, 0, 2031681, 524288, 0, 2031682, 524288, 0, 1507381, 524288, 0, 1572916, 524288, 0, 1572915, 524288, 0, 1572914, 524288, 0, 1638450, 524288, 0, 1638430, 524288, 0, 1638429, 524288, 0, 2162706, 524288, 0, 2818089, 524288, 0, 2818090, 524288, 0, 2228279, 524288, 0, 1507398, 524288, 0, 917537, 524288, 2, 1179672, 524288, 2, 1048614, 655360, 2, 655395, 655360, 2, 655389, 655360, 2, 589842, 524288, 2, 917526, 524288, 0, 1114129, 524288, 0, 983053, 524288, 0, 1179678, 589824, 1, 1048604, 589824, 1)
 
+[node name="Node2D" parent="." instance=ExtResource("3_sj2ht")]
+position = Vector2(740, 406)
+
 [node name="Location" type="Node2D" parent="."]
+
+[node name="vrag" parent="." instance=ExtResource("4_xs1u7")]
+position = Vector2(24, -49)
 
 [node name="Pers" parent="." instance=ExtResource("2_s275l")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(437, 229)
+position = Vector2(509, 284)
 collision_layer = 8
 collision_mask = 8
 
 [node name="Camera2D" type="Camera2D" parent="Pers"]
 position = Vector2(0, 25)
 zoom = Vector2(2, 2)
+
+[node name="CtrlInventory" type="Control" parent="Pers"]
+visibility_layer = 1048575
+z_index = 4096
+layout_mode = 3
+anchors_preset = 0
+offset_left = -262.0
+offset_top = -106.0
+offset_right = 261.0
+offset_bottom = 176.0
+script = ExtResource("8_pfxv0")
+inventory_path = NodePath("../../Inventory")
+default_item_icon = ExtResource("9_yxk7s")
+
+[node name="Key" type="Sprite2D" parent="."]
+position = Vector2(419, 115)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_uuri6")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("6_88ls3")
+item_protoset = SubResource("Resource_k1g2k")
+
+[node name="Healpotion" type="Sprite2D" parent="."]
+position = Vector2(1051, 341)
+texture = ExtResource("10_gl0wy")
+
+[node name="NewSprite68" type="Sprite2D" parent="."]
+position = Vector2(650, 160)
+scale = Vector2(0.453125, 0.460937)
+texture = ExtResource("11_sjcbq")
+
+[node name="NewSprite321" type="Sprite2D" parent="."]
+position = Vector2(608, 361)
+scale = Vector2(0.25, 0.225)
+texture = ExtResource("12_32bro")
