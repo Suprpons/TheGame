@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi0whlj2sb74h"]
+[gd_scene load_steps=11 format=3 uid="uid://bi0whlj2sb74h"]
 
 [ext_resource type="Script" path="res://pers.gd" id="1_hw5xl"]
 [ext_resource type="Texture2D" uid="uid://bcmmmruq1lx4b" path="res://Screenshot_2023-9-10_205626109.png" id="2_ngwtb"]
+[ext_resource type="Texture2D" uid="uid://cnjw8wn77f05i" path="res://addons/health_bar_2d/resources/health_bar_texture.png" id="3_6jyhj"]
+[ext_resource type="Script" path="res://addons/health_bar_2d/health_bar_2d.gd" id="3_pj3fp"]
 
 [sub_resource type="Animation" id="Animation_mwmon"]
 resource_name = "down"
@@ -86,6 +88,7 @@ size = Vector2(16, 5)
 script = ExtResource("1_hw5xl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 24)
 scale = Vector2(0.64, 0.6)
 texture = ExtResource("2_ngwtb")
 offset = Vector2(0, -40)
@@ -101,4 +104,22 @@ libraries = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
+position = Vector2(0, 23)
 shape = SubResource("RectangleShape2D_3ppwb")
+
+[node name="HealthBar2D" type="TextureProgressBar" parent="."]
+z_index = 80
+y_sort_enabled = true
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+offset_left = -39.0
+offset_top = -24.0
+offset_right = 55.0
+offset_bottom = -19.0
+scale = Vector2(0.64, 0.6)
+value = 1.0
+texture_under = ExtResource("3_6jyhj")
+texture_progress = ExtResource("3_6jyhj")
+tint_under = Color(0, 0, 0, 0)
+tint_progress = Color(1, 0, 0, 1)
+script = ExtResource("3_pj3fp")
+_static = true
