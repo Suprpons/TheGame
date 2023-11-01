@@ -35,7 +35,7 @@ func anim(direction):
 
 func _physics_process(_delta):
   var direction = vr.position - lastPos
-  print(direction, vr.position)
+  #print(direction, vr.position)
   var x = direction.x
   var y = direction.y
   anim(direction)

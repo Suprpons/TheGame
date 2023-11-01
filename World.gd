@@ -18,7 +18,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta):
-    print(per.health)
+    #print(per.health)
     var speed = 0.02 # put wanted speed here
 #    look_at(per.global_position)
     vr.position = lerp(vr.position,per.global_position,speed)
