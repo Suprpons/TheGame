@@ -12,16 +12,18 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    pass # Replace with function body.
+    per.kryak.connect(gameover)
 
+func gameover():
+    $RichTextLabel.visible = true
+    await get_tree().create_timer(3).timeout
+    wrld.get_tree().reload_current_scene()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta):
     #print(per.health)
-    var speed = 0.02 # put wanted speed here
 #    look_at(per.global_position)
-    vr.position = lerp(vr.position,per.global_position,speed)
     if Input.is_action_just_released("ui_inventory"):
          cinv.visible = !cinv.visible
     if Input.is_action_just_released("ui_use"): 

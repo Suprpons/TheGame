@@ -499,8 +499,9 @@ position = Vector2(740, 406)
 
 [node name="Location" type="Node2D" parent="."]
 
-[node name="vrag" parent="." instance=ExtResource("4_xs1u7")]
+[node name="vrag" parent="." node_paths=PackedStringArray("per") instance=ExtResource("4_xs1u7")]
 position = Vector2(24, -49)
+per = NodePath("../Pers")
 
 [node name="Pers" parent="." node_paths=PackedStringArray("vr") instance=ExtResource("2_s275l")]
 z_index = 1
@@ -549,3 +550,17 @@ texture = ExtResource("11_sjcbq")
 position = Vector2(608, 361)
 scale = Vector2(0.25, 0.225)
 texture = ExtResource("12_32bro")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+z_index = 10
+offset_left = 390.0
+offset_top = 230.0
+offset_right = 3773.0
+offset_bottom = 1592.0
+rotation = 0.00150925
+scale = Vector2(0.1, 0.1)
+theme_override_font_sizes/bold_font_size = 1000
+bbcode_enabled = true
+text = "[b][color=red]u died[/color][/b]"
+fit_content = true
