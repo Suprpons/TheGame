@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd5ahwjcg24tf"]
+[gd_scene load_steps=9 format=3 uid="uid://bd5ahwjcg24tf"]
 
 [ext_resource type="Script" path="res://vragtop.gd" id="1_77xmv"]
 [ext_resource type="Texture2D" uid="uid://bus6p3d0yxsjb" path="res://Screenshot_2023-10-17_19111473.png" id="1_d3p0f"]
-[ext_resource type="Script" path="res://vrag.gd" id="1_kdvyq"]
 
 [sub_resource type="Animation" id="Animation_wtm8n"]
 resource_name = "vrag forward"
@@ -11,7 +10,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody2D/Screenshot2023-10-1719111473:frame")
+tracks/0/path = NodePath("Screenshot2023-10-1719111473:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,7 +27,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody2D/Screenshot2023-10-1719111473:frame")
+tracks/0/path = NodePath("Screenshot2023-10-1719111473:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -44,7 +43,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody2D/Screenshot2023-10-1719111473:frame")
+tracks/0/path = NodePath("Screenshot2023-10-1719111473:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -61,7 +60,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody2D/Screenshot2023-10-1719111473:frame")
+tracks/0/path = NodePath("Screenshot2023-10-1719111473:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -82,7 +81,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eqf0x"]
 size = Vector2(14, 7.5)
 
-[node name="Node2D" type="Node2D"]
+[node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_77xmv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -90,16 +89,13 @@ libraries = {
 "": SubResource("AnimationLibrary_tgnkp")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-script = ExtResource("1_kdvyq")
-
-[node name="Screenshot2023-10-1719111473" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Screenshot2023-10-1719111473" type="Sprite2D" parent="."]
 scale = Vector2(0.64, 0.6)
 texture = ExtResource("1_d3p0f")
 hframes = 12
 vframes = 8
 frame = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 23.25)
 shape = SubResource("RectangleShape2D_eqf0x")

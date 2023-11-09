@@ -503,13 +503,12 @@ position = Vector2(740, 406)
 position = Vector2(24, -49)
 per = NodePath("../Pers")
 
-[node name="Pers" parent="." node_paths=PackedStringArray("vr") instance=ExtResource("2_s275l")]
+[node name="Pers" parent="." instance=ExtResource("2_s275l")]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(509, 284)
 collision_layer = 8
 collision_mask = 8
-vr = NodePath("../vrag")
 
 [node name="Camera2D" type="Camera2D" parent="Pers"]
 zoom = Vector2(2, 2)

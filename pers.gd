@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-
-var speed = 100  # speed in pixels/sec
 @onready var ap = $AnimationPlayer
 @onready var sp = $Sprite2D
+
+var speed = 100  # speed in pixels/sec
 var health := 100
-@export var vr: Node2D
+
 signal health_changed
 signal kryak
 
@@ -18,8 +18,6 @@ func _ready() -> void:
     # Need to be called to use the HealthBar2D
     $HealthBar2D.initialize("health_changed", 100)
     emit_signal("health_changed", health)
-    
-    
     
 
 func flash():
@@ -41,9 +39,8 @@ func hp_change(howmuch = 10):
     emit_signal("health_changed", health)
 
 func _physics_process(_delta):
-  $".".rotation += 20
-#  if abs(vr.position.distance_to(global_position)) < 10:
-#    hp_change()  
+  rotation += 20
+
   var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
   velocity = direction * speed
   var x = direction.x
