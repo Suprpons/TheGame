@@ -23,16 +23,20 @@ func _ready() -> void:
     
 
 func flash():
-    hp_change()
+    hp_change(-10)
     if sp.modulate == Color.RED:
       sp.modulate = Color.WHITE
     else:
       sp.modulate = Color.RED
 
-func hp_change():
-    health = health - 10
-    if health == 0:
+func hp_change(howmuch = 10):
+    health = health + howmuch
+    
+    if health <= 0:
       emit_signal("kryak")
+    if health > 100:
+      health = 100
+      
     print("health", health)
     emit_signal("health_changed", health)
 

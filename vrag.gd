@@ -7,9 +7,11 @@ var speed = 100  # speed in pixels/sec
 @onready var vr = $".."
 signal hit
 
+var last_hit: int
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-  pass # Replace with function body.
+  last_hit = Time.get_ticks_msec()
 
 
 var timer: Timer
@@ -34,16 +36,21 @@ func anim(direction):
     ap.play("vrag vprava")
   if x == 0 && y == 0:
     ap.play("vrag stand")
+    
+func check_hit(time_delta = 1000):
+    var now = Time.get_ticks_msec()
+    var res = now - last_hit > time_delta
+    if res:
+        last_hit = now
+    return res
+      
 
 func _physics_process(_delta):
   if vr.position.distance_to(vr.per.position) < 10:
-    emit_signal("hit")
-    vr.per.hp_change()
-    timer = Timer.new()
-    add_child(timer)
-    timer.timeout.connect(vr.per.flash)
-    timer.wait_time = 2
-    timer.start()
+    if check_hit():
+      vr.per.hp_change(-10)
+      emit_signal("hit")
+
   var speed = 0.02 # put wanted speed here
   vr.position = lerp(vr.position,vr.per.global_position,speed)
   $".".rotation += 1
