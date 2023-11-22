@@ -115,7 +115,6 @@ offset_left = -36.0
 offset_top = -42.0
 offset_right = -24.0
 offset_bottom = -41.0
-rotation = 2.35619
 scale = Vector2(6, 6)
 pivot_offset = Vector2(-0.0394025, 0.00988293)
 value = 1.0

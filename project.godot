@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GLoot="*res://addons/gloot/gloot_autoload.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+GameState="*res://gameState.gd"
 
 [editor_plugins]
 

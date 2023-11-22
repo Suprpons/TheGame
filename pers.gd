@@ -59,6 +59,15 @@ func _physics_process(_delta):
     ap.play("stand")
     
     
-  if Input.is_action_just_pressed("ui_accept"):
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  if Input.is_action_just_released("ui_accept"):
     DialogueManager.show_example_dialogue_balloon(load("res://simple_dialog.dialogue"))
   move_and_slide();

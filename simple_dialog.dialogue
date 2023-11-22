@@ -1,13 +1,22 @@
 ~ this_is_a_node_title
 
-Nathan: [[Hi|Hello|Howdy]], this is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
+???: Howdy! im Flowey! Flowey the Flower
+Flowey: Here are some choices.
+- DIE
+	set GameState.choseLife = false
+	do get_node("/World/Pers").emit_signal("kryak")
+	Flowey: [shake rate=70 level=20]you chose DEATH[/shake]
+- Live
+	set GameState.choseLife = true
+	do GameState.emit_signal("chooseLifeSignal")
+	Flowey: You chose to live but ill still kill you.
+	You: NO
+	Flowey: what do you-
+	You: *pulls out the reverse card*
+	Flowey: [speed=0.1]AAAAAAAAAA
+	Flowey: now revive me with the key
 - Start again => this_is_a_node_title
 - End the conversation => END
-Nathan: For more information see the online documentation.
+Flowey: [shake rate=50 level=20]For more information see the online documentation.[/shake]
 
 => END
