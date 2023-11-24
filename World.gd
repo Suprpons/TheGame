@@ -4,7 +4,6 @@ extends Node2D
 @onready var per = $Pers
 @onready var inv: Inventory = $Inventory
 @onready var cinv = $Pers/CtrlInventory
-@onready var wrld = $"."
 @onready var HPotion = $Healpotion
 @onready var HPotions = $NewSprite68
 @onready var sword = $NewSprite321
@@ -17,7 +16,7 @@ func _ready():
 func gameover():
     $RichTextLabel.visible = true
     await get_tree().create_timer(3).timeout
-    wrld.get_tree().reload_current_scene()
+    get_tree().reload_current_scene()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")

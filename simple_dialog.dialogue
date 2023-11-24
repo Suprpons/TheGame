@@ -4,7 +4,7 @@
 Flowey: Here are some choices.
 - DIE
 	set GameState.choseLife = false
-	do get_node("/World/Pers").emit_signal("kryak")
+	do GameState.emit_signal("chooseLifeSignal")
 	Flowey: [shake rate=70 level=20]you chose DEATH[/shake]
 - Live
 	set GameState.choseLife = true
