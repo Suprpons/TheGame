@@ -51,14 +51,15 @@ func check_hit(time_delta = 1000):
       
 
 func _physics_process(_delta):
-  if position.distance_to(per.position) < 10:
-    if check_hit():
-      per.hp_change(-10)
-      emit_signal("hit")
+  #if position.distance_to(per.position) < 10:
+    #if check_hit():
+      #per.hp_change(-10)
+      #emit_signal("hit")
 
   var speed = 0.02 # put wanted speed here
-  position = lerp(position, per.global_position, speed)
-  rotation += 1
+  if position.distance_to(per.global_position) > 32: 
+    position = lerp(position, per.global_position, speed)
+    
   var direction = position - lastPos
   #print(direction, vr.position)
   var x = direction.x

@@ -5,7 +5,7 @@ Flowey: Here are some choices.
 - DIE
 	set GameState.choseLife = false
 	do GameState.emit_signal("chooseLifeSignal")
-	Flowey: [shake rate=70 level=20]you chose DEATH[/shake]
+	Flowey: [shake rate=70 level=50]you chose DEATH[/shake]
 - Live
 	set GameState.choseLife = true
 	do GameState.emit_signal("chooseLifeSignal")

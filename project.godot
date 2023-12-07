@@ -8,11 +8,13 @@
 
 config_version=5
 
+recent_projects=["res://quests/first_steps.quest"]
+
 [application]
 
 config/name="TheGame"
 run/main_scene="res://pers.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -20,10 +22,11 @@ config/icon="res://icon.svg"
 GLoot="*res://addons/gloot/gloot_autoload.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameState="*res://gameState.gd"
+QuestManager="*res://addons/quest_manager/QuestManager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/gloot/plugin.cfg", "res://addons/health_bar_2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/gloot/plugin.cfg", "res://addons/health_bar_2d/plugin.cfg", "res://addons/quest_manager/plugin.cfg")
 
 [input]
 
@@ -45,6 +48,11 @@ nothing={
 sprint={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+ui_attack={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 

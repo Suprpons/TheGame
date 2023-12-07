@@ -79,7 +79,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eqf0x"]
-size = Vector2(14, 7.5)
+size = Vector2(14, 5.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_77xmv")
@@ -97,5 +97,6 @@ vframes = 8
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 7
 position = Vector2(0, 23.25)
 shape = SubResource("RectangleShape2D_eqf0x")

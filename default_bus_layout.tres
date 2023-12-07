@@ -2,8 +2,9 @@
 
 [sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_7ug1v"]
 resource_name = "Distortion"
+pre_gain = 6.23
 
 [resource]
-bus/0/volume_db = 4.82901
+bus/0/volume_db = -5.47449
 bus/0/effect/0/effect = SubResource("AudioEffectDistortion_7ug1v")
-bus/0/effect/0/enabled = true
+bus/0/effect/0/enabled = false

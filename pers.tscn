@@ -1,9 +1,28 @@
-[gd_scene load_steps=11 format=3 uid="uid://bi0whlj2sb74h"]
+[gd_scene load_steps=17 format=3 uid="uid://bi0whlj2sb74h"]
 
 [ext_resource type="Script" path="res://pers.gd" id="1_hw5xl"]
 [ext_resource type="Texture2D" uid="uid://bcmmmruq1lx4b" path="res://Screenshot_2023-9-10_205626109.png" id="2_ngwtb"]
 [ext_resource type="Texture2D" uid="uid://cnjw8wn77f05i" path="res://addons/health_bar_2d/resources/health_bar_texture.png" id="3_6jyhj"]
 [ext_resource type="Script" path="res://addons/health_bar_2d/health_bar_2d.gd" id="3_pj3fp"]
+[ext_resource type="PackedScene" uid="uid://k1l6ck8je6mh" path="res://sword.tscn" id="5_4xrfm"]
+[ext_resource type="Texture2D" uid="uid://da1qhm77crs0o" path="res://images/particles_flipbook_example.png" id="5_pby51"]
+
+[sub_resource type="Animation" id="Animation_or80t"]
+resource_name = "attack1"
+length = 1.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [85, 43]
+}
 
 [sub_resource type="Animation" id="Animation_mwmon"]
 resource_name = "down"
@@ -75,6 +94,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ybmb6"]
 _data = {
+"attack1": SubResource("Animation_or80t"),
 "down": SubResource("Animation_mwmon"),
 "right": SubResource("Animation_t85kj"),
 "stand": SubResource("Animation_di8sx"),
@@ -83,6 +103,26 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ppwb"]
 size = Vector2(16, 5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_af8dh"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 7
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ky4nj"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 27.11
+gravity = Vector3(0, 98, 0)
+scale_min = 0.5
+scale_max = 0.5
+anim_speed_min = 1.4
+anim_speed_max = 1.4
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_taabj"]
+polygon = PackedVector2Array(-8, 20, 8, 20, 8, 26, -8, 26)
 
 [node name="Pers" type="CharacterBody2D"]
 script = ExtResource("1_hw5xl")
@@ -94,7 +134,7 @@ texture = ExtResource("2_ngwtb")
 offset = Vector2(0, -40)
 hframes = 12
 vframes = 8
-frame = 69
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -126,3 +166,18 @@ tint_progress = Color(0, 1, 0, 1)
 script = ExtResource("3_pj3fp")
 _static = true
 _offset = Vector2(-30, -30)
+
+[node name="Sprite2D2" parent="." instance=ExtResource("5_4xrfm")]
+visible = false
+position = Vector2(2, -18)
+scale = Vector2(1.03125, 0.590695)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+material = SubResource("CanvasItemMaterial_af8dh")
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_ky4nj")
+texture = ExtResource("5_pby51")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_taabj")

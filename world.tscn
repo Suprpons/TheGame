@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b4q85tg50lb5n"]
+[gd_scene load_steps=23 format=3 uid="uid://b4q85tg50lb5n"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_sie2j"]
 [ext_resource type="Texture2D" uid="uid://cqcqf2kp1sx1" path="res://tilesets/tileset_grassland.png" id="2_kc3mc"]
@@ -13,6 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://baos55277liol" path="res://ITEMs/healpotion.png" id="10_gl0wy"]
 [ext_resource type="Texture2D" uid="uid://dkurp6xhc4dte" path="res://ITEMs/NewSprite68.png" id="11_sjcbq"]
 [ext_resource type="Texture2D" uid="uid://dpjfm86nkihhx" path="res://ITEMs/NewSprite321.png" id="12_32bro"]
+[ext_resource type="Texture2D" uid="uid://cqi3j01138p81" path="res://Screenshot 2023-11-30 at 16.19.16 copy.png" id="14_m2fld"]
+
+[sub_resource type="Environment" id="Environment_5ck1n"]
+background_mode = 1
+background_color = Color(0.858824, 0.588235, 0.384314, 1)
+ambient_light_color = Color(0.733333, 0.498039, 0.701961, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_22b5v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w5fvk"]
 texture = ExtResource("2_kc3mc")
@@ -452,6 +460,12 @@ texture = ExtResource("2_kc3mc")
 physics_layer_0/collision_layer = 8
 sources/0 = SubResource("TileSetAtlasSource_w5fvk")
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gy0dm"]
+polygon = PackedVector2Array(626, 282, 631, 274, 632, 263, 626, 247, 617, 240, 606, 246, 599, 273, 608, 283, 617, 286)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1noge"]
+polygon = PackedVector2Array(-97735, -33866, -97721, -33866, -97721, -33860, -97735, -33860)
+
 [sub_resource type="Resource" id="Resource_k1g2k"]
 script = ExtResource("7_j16qe")
 json_data = "[{
@@ -476,9 +490,15 @@ json_data = "[{
 },
 ]"
 
+[sub_resource type="AudioStream" id="AudioStream_e5mg8"]
+
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_sie2j")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5ck1n")
+camera_attributes = SubResource("CameraAttributesPractical_22b5v")
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -494,14 +514,22 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(851995, 524288, 0, 524344, 524288, 0, 1507382, 524288, 0, 1441802, 524288, 0, 2293792, 524288, 0, 2031681, 524288, 0, 2031682, 524288, 0, 1507381, 524288, 0, 1572916, 524288, 0, 1572915, 524288, 0, 1572914, 524288, 0, 1638450, 524288, 0, 1638430, 524288, 0, 1638429, 524288, 0, 2162706, 524288, 0, 2818089, 524288, 0, 2818090, 524288, 0, 2228279, 524288, 0, 1507398, 524288, 0, 917537, 524288, 2, 1179672, 524288, 2, 1048614, 655360, 2, 655395, 655360, 2, 655389, 655360, 2, 589842, 524288, 2, 917526, 524288, 0, 1114129, 524288, 0, 983053, 524288, 0, 1179678, 589824, 1, 1048604, 589824, 1)
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="TileMap"]
+occluder = SubResource("OccluderPolygon2D_gy0dm")
+
 [node name="Node2D" parent="." instance=ExtResource("3_sj2ht")]
 position = Vector2(740, 406)
 
 [node name="Location" type="Node2D" parent="."]
 
 [node name="vrag" parent="." node_paths=PackedStringArray("per") instance=ExtResource("4_xs1u7")]
-position = Vector2(24, -49)
+position = Vector2(-3644, 33)
 per = NodePath("../Pers")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="vrag"]
+process_mode = 3
+position = Vector2(97728, 33886)
+occluder = SubResource("OccluderPolygon2D_1noge")
 
 [node name="Pers" parent="." instance=ExtResource("2_s275l")]
 z_index = 1
@@ -550,6 +578,8 @@ position = Vector2(608, 361)
 scale = Vector2(0.25, 0.225)
 texture = ExtResource("12_32bro")
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 visible = false
 z_index = 10
@@ -563,3 +593,18 @@ theme_override_font_sizes/bold_font_size = 1000
 bbcode_enabled = true
 text = "[b][color=red]u died[/color][/b]"
 fit_content = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(586, 355)
+color = Color(1, 0.266355, 0, 1)
+energy = 2.25
+shadow_enabled = true
+texture = ExtResource("14_m2fld")
+texture_scale = 1.14
+metadata/use_color_temperature = false
+metadata/color_temperature = 1000
+metadata/color_filter = Color(1, 1, 1, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStream_e5mg8")
+attenuation = 1.41421

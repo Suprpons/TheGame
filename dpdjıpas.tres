@@ -1,0 +1,12 @@
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://c3lh6iq6q0edd"]
+
+[sub_resource type="Sky" id="Sky_c4hpu"]
+
+[resource]
+background_mode = 5
+background_color = Color(1, 0, 0, 1)
+background_energy_multiplier = 8.4
+sky = SubResource("Sky_c4hpu")
+sky_custom_fov = 79.6
+ambient_light_color = Color(0.796078, 0, 0.560784, 1)
+ambient_light_energy = 15.11

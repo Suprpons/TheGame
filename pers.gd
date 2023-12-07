@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var ap = $AnimationPlayer
 @onready var sp = $Sprite2D
+@onready var sword = $Sprite2D2
 
 var speed = 100  # speed in pixels/sec
 var health := 100
@@ -11,6 +12,15 @@ signal kryak
 
 var timer : Timer
 var modc : Color
+
+func attack():
+  sword.show()
+  sword.get_node("AnimationPlayer").play("swing forward")
+  await sword.get_node("AnimationPlayer").animation_finished
+  sword.hide()
+
+
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -39,8 +49,8 @@ func hp_change(howmuch = 10):
     emit_signal("health_changed", health)
 
 func _physics_process(_delta):
-  rotation += 20
-
+  if Input.is_action_just_pressed("ui_attack"):
+    attack()
   var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
   velocity = direction * speed
   var x = direction.x

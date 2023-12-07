@@ -1,0 +1,15 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://bg2bbf18ojcpo"
+path="res://.godot/imported/first_steps.quest-542b68b61b9cbe743df2d1c28be3dbf6.tres"
+
+[deps]
+
+source_file="res://quests/first_steps.quest"
+dest_files=["res://.godot/imported/first_steps.quest-542b68b61b9cbe743df2d1c28be3dbf6.tres"]
+
+[params]
+
+defaults=true
