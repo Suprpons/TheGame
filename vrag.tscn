@@ -94,7 +94,7 @@ scale = Vector2(0.64, 0.6)
 texture = ExtResource("1_d3p0f")
 hframes = 12
 vframes = 8
-frame = 1
+frame = 26
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 7

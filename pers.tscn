@@ -125,6 +125,8 @@ anim_speed_max = 1.4
 polygon = PackedVector2Array(-8, 20, 8, 20, 8, 26, -8, 26)
 
 [node name="Pers" type="CharacterBody2D"]
+collision_layer = 30
+collision_mask = 30
 script = ExtResource("1_hw5xl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

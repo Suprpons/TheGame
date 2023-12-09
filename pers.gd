@@ -9,6 +9,7 @@ var health := 100
 
 signal health_changed
 signal kryak
+signal damage(how_much)
 
 var timer : Timer
 var modc : Color
@@ -28,7 +29,11 @@ func _ready() -> void:
     # Need to be called to use the HealthBar2D
     $HealthBar2D.initialize("health_changed", 100)
     emit_signal("health_changed", health)
-    
+    damage.connect(on_damage)
+
+func on_damage(how_much):
+    print("pers.on_damage", how_much)
+    hp_change(how_much)
 
 func flash():
     hp_change(-10)
@@ -45,7 +50,7 @@ func hp_change(howmuch = 10):
     if health > 100:
       health = 100
       
-    print("health", health)
+    print("pers.health: ", health)
     emit_signal("health_changed", health)
 
 func _physics_process(_delta):
