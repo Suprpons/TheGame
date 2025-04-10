@@ -119,6 +119,7 @@ func get_next_dialogue_line(resource: DialogueResource, key: String = "", extra_
 
   # If our dialogue is nothing then we hit the end
   if not is_valid(dialogue):
+    print('dialogueline not valid ', dialogue)
     dialogue_ended.emit(resource)
     return null
 
@@ -134,6 +135,7 @@ func get_next_dialogue_line(resource: DialogueResource, key: String = "", extra_
         pass
     if actual_next_id in [DialogueConstants.ID_END_CONVERSATION, DialogueConstants.ID_NULL, null]:
       # End the conversation
+      print('End the conversation: actual_next_id', actual_next_id)
       dialogue_ended.emit(resource)
       return null
     else:
