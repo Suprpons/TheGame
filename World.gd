@@ -5,7 +5,7 @@ extends Node2D
 @onready var inv: Inventory = $Inventory
 @onready var cinv = $Pers/CtrlInventory
 @onready var HPotion = $Healpotion
-@onready var HPotions = $NewSprite68
+@onready var HPotions = $Healpotionsanim
 @onready var sword = $NewSprite321
 @onready var vr = $vrag
 
@@ -45,4 +45,5 @@ func _process(delta):
               inv.create_and_add_item("sword")
               sword.queue_free()
            
+
         

@@ -4,6 +4,7 @@ extends CharacterBody2D
 signal health_changed
 signal stamina_changed
 
+var heal_power := 10
 var direction = Vector2.ZERO
 var speed := 100
 var sprint_speed := 150
@@ -18,7 +19,8 @@ func _ready() -> void:
     $HealthBar2D.initialize("health_changed", health)
     $HealthBar2D2.initialize("stamina_changed", max_stamina)
 
-
+func wth():
+  print('what the hell')
 func _process(delta) -> void:
     direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
     direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
@@ -32,10 +34,23 @@ func _process(delta) -> void:
         stamina += 0.2
         emit_signal("stamina_changed", stamina)
     
-    move_and_slide()
+    move_and_slide();
 
 
 func hurt() -> void:
     if health > 0:
         health -= 1
-        emit_signal("health_changed", health)
+        emit_signal("health_changed", health);
+        
+func _heal(CharacterBody2D):
+        CharacterBody2D.health =+ heal_power
+        CharacterBody2D.emit_signal("health_changed", CharacterBody2D.health)
+        return health_changed
+        
+        
+        if Input.is_action_just_pressed('ui_heal'):
+          _heal(CharacterBody2D)
+          
+        
+         
+

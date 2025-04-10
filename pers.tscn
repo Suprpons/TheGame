@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://bi0whlj2sb74h"]
+[gd_scene load_steps=16 format=3 uid="uid://bi0whlj2sb74h"]
 
 [ext_resource type="Script" path="res://pers.gd" id="1_hw5xl"]
-[ext_resource type="Texture2D" uid="uid://bcmmmruq1lx4b" path="res://Screenshot_2023-9-10_205626109.png" id="2_ngwtb"]
+[ext_resource type="Texture2D" uid="uid://bcmmmruq1lx4b" path="res://spritesheets/Screenshot_2023-9-10_205626109.png" id="2_prly6"]
 [ext_resource type="Texture2D" uid="uid://cnjw8wn77f05i" path="res://addons/health_bar_2d/resources/health_bar_texture.png" id="3_6jyhj"]
 [ext_resource type="Script" path="res://addons/health_bar_2d/health_bar_2d.gd" id="3_pj3fp"]
-[ext_resource type="PackedScene" uid="uid://k1l6ck8je6mh" path="res://sword.tscn" id="5_4xrfm"]
 [ext_resource type="Texture2D" uid="uid://da1qhm77crs0o" path="res://images/particles_flipbook_example.png" id="5_pby51"]
 
 [sub_resource type="Animation" id="Animation_or80t"]
@@ -132,11 +131,11 @@ script = ExtResource("1_hw5xl")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 24)
 scale = Vector2(0.64, 0.6)
-texture = ExtResource("2_ngwtb")
+texture = ExtResource("2_prly6")
 offset = Vector2(0, -40)
 hframes = 12
 vframes = 8
-frame = 1
+frame = 85
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -169,17 +168,14 @@ script = ExtResource("3_pj3fp")
 _static = true
 _offset = Vector2(-30, -30)
 
-[node name="Sprite2D2" parent="." instance=ExtResource("5_4xrfm")]
-visible = false
-position = Vector2(2, -18)
-scale = Vector2(1.03125, 0.590695)
-
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
 material = SubResource("CanvasItemMaterial_af8dh")
 amount = 1
+sub_emitter = NodePath(".")
 process_material = SubResource("ParticleProcessMaterial_ky4nj")
 texture = ExtResource("5_pby51")
+preprocess = 1.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_taabj")

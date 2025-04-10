@@ -55,8 +55,6 @@ func _physics_process(_delta):
     #if check_hit():
       #per.hp_change(-10)
       #emit_signal("hit")
-  move_and_slide();
-  return
   var speed = 0.02 # put wanted speed here
   if position.distance_to(per.global_position) > 32: 
     position = lerp(position, per.global_position, speed)
