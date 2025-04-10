@@ -1,0 +1,113 @@
+[gd_scene load_steps=21 format=3 uid="uid://b8468qkcraev"]
+
+[ext_resource type="Script" path="res://scripts/MultiParticles.cs" id="1_weson"]
+[ext_resource type="Texture2D" uid="uid://b8yqiftn6q2ij" path="res://addons/kenney_particle_pack/circle_05.png" id="2_qtlvw"]
+
+[sub_resource type="Curve" id="Curve_tpndr"]
+_data = [Vector2(0.782074, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wtgks"]
+curve = SubResource("Curve_tpndr")
+
+[sub_resource type="Curve" id="Curve_7t07v"]
+min_value = -5.0
+max_value = 5.0
+_data = [Vector2(0, -5), 0.0, 0.0, 0, 0, Vector2(0.495606, -5), 0.0, 0.0, 0, 0, Vector2(1, 0.00593328), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8froe"]
+curve = SubResource("Curve_7t07v")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_50j2f"]
+emission_shape = 2
+emission_sphere_radius = 3.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+radial_accel_min = 0.18
+radial_accel_max = 0.22
+radial_accel_curve = SubResource("CurveTexture_8froe")
+color = Color(0, 0.564706, 1, 1)
+alpha_curve = SubResource("CurveTexture_wtgks")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blklt"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_qtlvw")
+emission_enabled = true
+emission = Color(0, 0.741176, 1, 1)
+emission_energy_multiplier = 5.0
+rim_enabled = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_lxuhl"]
+material = SubResource("StandardMaterial3D_blklt")
+size = Vector2(0.1, 0.1)
+
+[sub_resource type="Curve" id="Curve_0jmg7"]
+_data = [Vector2(0.251318, 1), 0.0, 0.0, 0, 0, Vector2(0.898361, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gf3su"]
+curve = SubResource("Curve_0jmg7")
+
+[sub_resource type="Gradient" id="Gradient_vj4no"]
+offsets = PackedFloat32Array(0, 0.636008)
+colors = PackedColorArray(0, 0.894118, 1, 1, 0, 0.564706, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8k4ey"]
+gradient = SubResource("Gradient_vj4no")
+
+[sub_resource type="Curve" id="Curve_iutvr"]
+_data = [Vector2(0.490334, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ga1td"]
+curve = SubResource("Curve_iutvr")
+
+[sub_resource type="Curve" id="Curve_yuhne"]
+max_value = 5.0
+_data = [Vector2(0, 0.169831), 0.0, 0.0, 0, 0, Vector2(0.625659, 0.729012), 0.0, 0.0, 0, 0, Vector2(1, 4.63364), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nfm8j"]
+curve = SubResource("Curve_yuhne")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t7lly"]
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_curve = SubResource("CurveTexture_nfm8j")
+color_ramp = SubResource("GradientTexture1D_8k4ey")
+alpha_curve = SubResource("CurveTexture_gf3su")
+emission_curve = SubResource("CurveTexture_ga1td")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_egr1g"]
+transparency = 1
+vertex_color_use_as_albedo = true
+emission = Color(0, 0.682353, 1, 1)
+emission_energy_multiplier = 11.57
+rim_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_ik8yd"]
+material = SubResource("StandardMaterial3D_egr1g")
+
+[node name="Implosion" type="Node3D" node_paths=PackedStringArray("Particles")]
+script = ExtResource("1_weson")
+Particles = [NodePath("Bits"), NodePath("Sphere")]
+
+[node name="Bits" type="GPUParticles3D" parent="."]
+amount = 64
+lifetime = 4.0
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_50j2f")
+draw_pass_1 = SubResource("QuadMesh_lxuhl")
+
+[node name="Sphere" type="GPUParticles3D" parent="."]
+amount = 1
+lifetime = 4.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_t7lly")
+draw_pass_1 = SubResource("SphereMesh_ik8yd")

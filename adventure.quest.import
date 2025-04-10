@@ -1,0 +1,15 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://0x5qhuge271f"
+path="res://.godot/imported/adventure.quest-f12c95248f1b81e6251f98e965408179.tres"
+
+[deps]
+
+source_file="res://adventure.quest"
+dest_files=["res://.godot/imported/adventure.quest-f12c95248f1b81e6251f98e965408179.tres"]
+
+[params]
+
+defaults=true

@@ -1,0 +1,15 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://180x6gbvaf1l"
+path="res://.godot/imported/second_steps.quest-79043487ed858c9686d8228ae40015b0.tres"
+
+[deps]
+
+source_file="res://second_steps.quest"
+dest_files=["res://.godot/imported/second_steps.quest-79043487ed858c9686d8228ae40015b0.tres"]
+
+[params]
+
+defaults=true

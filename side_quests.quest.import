@@ -1,0 +1,15 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://dvwbdy3nc8ow5"
+path="res://.godot/imported/side_quests.quest-a1b13203800b1c6e2c37ba2207759573.tres"
+
+[deps]
+
+source_file="res://side_quests.quest"
+dest_files=["res://.godot/imported/side_quests.quest-a1b13203800b1c6e2c37ba2207759573.tres"]
+
+[params]
+
+defaults=true

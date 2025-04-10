@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dh2m1f5rfq77i"]
+
+[ext_resource type="Texture2D" uid="uid://cbj2fylcy4g6m" path="res://New Piskel (1).png" id="1_erim3"]
+[ext_resource type="Script" path="res://landingsun.gd" id="1_weoul"]
+[ext_resource type="Script" path="res://animationprocess.gd" id="2_llbgu"]
+
+[sub_resource type="Animation" id="Animation_teaik"]
+resource_name = "stand"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lmeui"]
+_data = {
+"stand": SubResource("Animation_teaik")
+}
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_weoul")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_erim3")
+hframes = 2
+vframes = 2
+script = ExtResource("2_llbgu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, -27, -26, -28, -26, 33, -5, 55, 29, 30, 29, -17)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lmeui")
+}
