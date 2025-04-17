@@ -37,8 +37,9 @@ func _ready() -> void:
     damage.connect(on_damage)
     DialogueManager.dialogue_ended.connect(dialogue_close)
       
-func dialogue_close():
-  print('works')
+func dialogue_close(resource):
+  await get_tree().create_timer(0.3).timeout
+  print('hateuworks')
   if dialogue_active == true:
     dialogue_active = false
   
