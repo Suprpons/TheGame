@@ -13,7 +13,7 @@ recent_projects=["res://second_steps.quest", "res://quests/first_steps.quest", "
 [application]
 
 config/name="TheGame"
-run/main_scene="res://world.tscn"
+run/main_scene="res://pers.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

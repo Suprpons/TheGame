@@ -9,17 +9,9 @@ extends Node2D
 @onready var sword = $NewSprite321
 @onready var vr = $vrag
 
-var dialogue_active = false
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
     per.kryak.connect(gameover)
-    DialogueManager.dialogue_ended.connect(dialogue_close)
-    print('dialog manager is ready')
-
-func dialogue_close(resource):
-  print('dialogue_close')
-  dialogue_active = false 
 
 func gameover():
     $RichTextLabel.visible = true
@@ -52,14 +44,6 @@ func _process(delta):
             if (sword.global_position.distance_to(per.global_position)) < 50:
               inv.create_and_add_item("sword")
               sword.queue_free()
-    if Input.is_action_just_released("ui_accept"):
-        if dialogue_active:
-            print('dialogue started')
-        else:
-            DialogueManager.show_example_dialogue_balloon(load("res://simple_dialog.dialogue"))
-            dialogue_active = true
+           
 
         
-
-      
-
