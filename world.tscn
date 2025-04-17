@@ -483,8 +483,9 @@ json_data = "[{
 \"image\": \"res://ITEMs/healpotionsinv.png\"
 },
 {
-\"id\": \"sword\",
-\"image\": \"res://ITEMs/NewSprite321.png\"
+\"id\": \"sword    ATK: +3\",
+\"image\": \"res://ITEMs/NewSprite321.png\",
+\"label\": \"sword        ATK: +3\"
 },
 ]"
 

@@ -42,7 +42,7 @@ func _process(delta):
             
         if !!sword:
             if (sword.global_position.distance_to(per.global_position)) < 50:
-              inv.create_and_add_item("sword")
+              inv.create_and_add_item("sword    ATK: +3")
               sword.queue_free()
            
 
