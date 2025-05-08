@@ -140,7 +140,7 @@ frame = 85
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
 libraries = {
-"": SubResource("AnimationLibrary_ybmb6")
+&"": SubResource("AnimationLibrary_ybmb6")
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -173,9 +173,9 @@ visible = false
 material = SubResource("CanvasItemMaterial_af8dh")
 amount = 1
 sub_emitter = NodePath(".")
-process_material = SubResource("ParticleProcessMaterial_ky4nj")
 texture = ExtResource("5_pby51")
 preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_ky4nj")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_taabj")

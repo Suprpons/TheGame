@@ -33,5 +33,5 @@ script = ExtResource("2_chl3d")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_4itq2")
+&"": SubResource("AnimationLibrary_4itq2")
 }

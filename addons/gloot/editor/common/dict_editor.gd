@@ -1,12 +1,12 @@
 @tool
 extends Control
 
-signal value_changed(key, value)
-signal value_removed(key)
+signal value_changed(key: String, value: Variant)
+signal value_removed(key: String)
 
-const Verify = preload("res://addons/gloot/core/verify.gd")
-const ValueEditor = preload("res://addons/gloot/editor/common/value_editor.gd")
-const supported_types: Array[int] = [
+const _Verify = preload("res://addons/gloot/core/verify.gd")
+const _ValueEditor = preload("res://addons/gloot/editor/common/value_editor.gd")
+const _supported_types: Array[int] = [
     TYPE_BOOL,
     TYPE_INT,
     TYPE_FLOAT,
@@ -32,41 +32,31 @@ const supported_types: Array[int] = [
 @onready var opt_type = $VBoxContainer/HBoxContainer/OptType
 @onready var btn_add = $VBoxContainer/HBoxContainer/BtnAdd
 
-@export var dictionary: Dictionary :
-    get:
-        return dictionary
+@export var dictionary: Dictionary:
     set(new_dictionary):
         dictionary = new_dictionary
         refresh()
-@export var color_map: Dictionary :
-    get:
-        return color_map
+@export var color_map: Dictionary:
     set(new_color_map):
         color_map = new_color_map
         refresh()
-@export var remove_button_map: Dictionary :
-    get:
-        return remove_button_map
+@export var remove_button_map: Dictionary:
     set(new_remove_button_map):
         remove_button_map = new_remove_button_map
         refresh()
-@export var immutable_keys: Array[String] :
-    get:
-        return immutable_keys
+@export var immutable_keys: Array[String]:
     set(new_immutable_keys):
         immutable_keys = new_immutable_keys
         refresh()
-@export var default_color: Color = Color.WHITE :
-    get:
-        return default_color
+@export var default_color: Color = Color.WHITE:
     set(new_default_color):
         default_color = new_default_color
         refresh()
 
 
 func _ready() -> void:
-    btn_add.pressed.connect(Callable(self, "_on_btn_add"))
-    edt_property_name.text_submitted.connect(Callable(self, "_on_text_entered"))
+    btn_add.pressed.connect(_on_btn_add)
+    edt_property_name.text_submitted.connect(_on_text_entered)
     refresh()
 
 
@@ -85,7 +75,7 @@ func _on_text_entered(_new_text: String) -> void:
 func _add_dict_field(name: String, type: int) -> bool:
     if (name.is_empty() || type < 0 || dictionary.has(name)):
         return false
-    dictionary[name] = Verify.create_var(type)
+    dictionary[name] = _Verify.create_var(type)
     return true
 
 
@@ -102,9 +92,9 @@ func refresh() -> void:
 
 
 func _refresh_add_property() -> void:
-    for type in supported_types:
-        opt_type.add_item(Verify.type_names[type], type)
-    opt_type.select(supported_types.find(TYPE_STRING))
+    for type in _supported_types:
+        opt_type.add_item(_Verify.type_names[type], type)
+    opt_type.select(_supported_types.find(TYPE_STRING))
 
 
 func _clear() -> void:
@@ -132,7 +122,7 @@ func _add_key(key: String, color: Color) -> void:
 
     var value = dictionary[key]
     _add_label(key, color)
-    _add_label(Verify.type_names[typeof(dictionary[key])], color)
+    _add_label(_Verify.type_names[typeof(dictionary[key])], color)
     _add_value_editor(key)
     _add_remove_button(key)
 
@@ -146,11 +136,11 @@ func _add_label(key: String, color: Color) -> void:
 
 
 func _add_value_editor(key: String) -> void:
-    var value_editor: Control = ValueEditor.new()
+    var value_editor: Control = _ValueEditor.new()
     value_editor.value = dictionary[key]
     value_editor.size_flags_horizontal = SIZE_EXPAND_FILL
     value_editor.enabled = (not key in immutable_keys)
-    value_editor.value_changed.connect(Callable(self, "_on_value_changed").bind(key, value_editor))
+    value_editor.value_changed.connect(_on_value_changed.bind(key, value_editor))
     grid_container.add_child(value_editor)
 
 
@@ -166,7 +156,7 @@ func _add_remove_button(key: String) -> void:
         button.text = remove_button_map[key].text
         button.disabled = remove_button_map[key].disabled
         button.icon = remove_button_map[key].icon
-    button.pressed.connect(Callable(self, "_on_remove_button").bind(key))
+    button.pressed.connect(_on_remove_button.bind(key))
     grid_container.add_child(button)
 
 

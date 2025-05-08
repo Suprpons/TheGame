@@ -1,0 +1,33 @@
+{
+	"craft_station_types": [
+		{
+			"id": "",
+			"name": "New Craft Station Type"
+		}
+	],
+	"items": [
+		{
+			"can_stack": true,
+			"icon": "res://ITEMs/Key.png",
+			"id": "key",
+			"max_stack": 0,
+			"name": "Key name",
+			"weight": 0.0
+		},
+		{
+			"can_stack": true,
+			"icon": "res://ITEMs/NewSprite321.png",
+			"id": "sword",
+			"max_stack": 0,
+			"name": "Sword item name",
+			"weight": 0.0
+		},
+		{
+			"can_stack": true,
+			"id": "",
+			"max_stack": 0,
+			"name": "New Item definition",
+			"weight": 0.0
+		}
+	]
+}

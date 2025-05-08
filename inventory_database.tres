@@ -1,0 +1,24 @@
+[gd_resource type="InventoryDatabase" load_steps=7 format=3 uid="uid://bpf0bitmhb55p"]
+
+[ext_resource type="Texture2D" uid="uid://dsqnv7hxxayak" path="res://ITEMs/Key.png" id="1_u2iit"]
+[ext_resource type="Texture2D" uid="uid://dpjfm86nkihhx" path="res://ITEMs/NewSprite321.png" id="2_5jewl"]
+
+[sub_resource type="ItemDefinition" id="ItemDefinition_lnkph"]
+id = "key"
+name = "Key name"
+icon = ExtResource("1_u2iit")
+
+[sub_resource type="ItemDefinition" id="ItemDefinition_5jewl"]
+id = "sword"
+name = "Sword item name"
+icon = ExtResource("2_5jewl")
+
+[sub_resource type="ItemDefinition" id="ItemDefinition_mkn2f"]
+name = "New Item definition"
+
+[sub_resource type="CraftStationType" id="CraftStationType_u2iit"]
+name = "New Craft Station Type"
+
+[resource]
+items = Array[ItemDefinition]([SubResource("ItemDefinition_lnkph"), SubResource("ItemDefinition_5jewl"), SubResource("ItemDefinition_mkn2f")])
+stations_type = Array[CraftStationType]([SubResource("CraftStationType_u2iit")])

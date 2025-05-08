@@ -1,19 +1,18 @@
-[gd_scene load_steps=26 format=3 uid="uid://b4q85tg50lb5n"]
+[gd_scene load_steps=24 format=3 uid="uid://b4q85tg50lb5n"]
 
 [ext_resource type="Script" uid="uid://dlaeunmlxshlj" path="res://World.gd" id="1_sie2j"]
 [ext_resource type="Texture2D" uid="uid://cqcqf2kp1sx1" path="res://tilesets/tileset_grassland.png" id="2_kc3mc"]
 [ext_resource type="PackedScene" uid="uid://bi0whlj2sb74h" path="res://pers.tscn" id="2_s275l"]
 [ext_resource type="PackedScene" uid="uid://bd5ahwjcg24tf" path="res://vrag.tscn" id="4_xs1u7"]
 [ext_resource type="Texture2D" uid="uid://dsqnv7hxxayak" path="res://ITEMs/Key.png" id="5_uuri6"]
-[ext_resource type="Script" uid="uid://bdvdiyckr0mbb" path="res://addons/gloot/core/inventory.gd" id="6_88ls3"]
-[ext_resource type="Script" uid="uid://cct4fglsld1e3" path="res://addons/gloot/core/item_protoset.gd" id="7_j16qe"]
-[ext_resource type="Script" uid="uid://cpqapjc7rij5f" path="res://addons/gloot/ui/ctrl_inventory.gd" id="8_pfxv0"]
-[ext_resource type="Texture2D" uid="uid://b2hkcwwq10cut" path="res://icon.png" id="9_yxk7s"]
+[ext_resource type="PackedScene" uid="uid://1dijqt6vr078" path="res://addons/inventory-system-demos/ui/grid/grid_inventory_panel.tscn" id="9_bc84e"]
 [ext_resource type="Texture2D" uid="uid://dpjfm86nkihhx" path="res://ITEMs/NewSprite321.png" id="12_32bro"]
 [ext_resource type="Texture2D" uid="uid://cqi3j01138p81" path="res://Screenshot 2023-11-30 at 16.19.16 copy.png" id="14_m2fld"]
 [ext_resource type="PackedScene" uid="uid://dtf5hvms31lpo" path="res://NPCs/follower/follower.tscn" id="15_ln5rf"]
 [ext_resource type="Texture2D" uid="uid://ov17d48xxrgf" path="res://spritesheets/test_spritesheet.png" id="16_ri3j2"]
+[ext_resource type="InventoryDatabase" uid="uid://bpf0bitmhb55p" path="res://inventory_database.tres" id="17_ikiii"]
 [ext_resource type="Texture2D" uid="uid://btlntd6b7un6a" path="res://spritesheets/pers2.png" id="17_r5lav"]
+[ext_resource type="PackedScene" uid="uid://54er1kef8y35" path="res://pickable_item.tscn" id="18_ikiii"]
 [ext_resource type="Texture2D" uid="uid://bcmmmruq1lx4b" path="res://spritesheets/Screenshot_2023-9-10_205626109.png" id="18_mg2g7"]
 [ext_resource type="Texture2D" uid="uid://bp3wgadb4evlj" path="res://healpotionsanim.png" id="19_dcilf"]
 [ext_resource type="PackedScene" uid="uid://dh2m1f5rfq77i" path="res://landingsun.tscn" id="19_dodp5"]
@@ -186,31 +185,6 @@ polygon = PackedVector2Array(626, 282, 631, 274, 632, 263, 626, 247, 617, 240, 6
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1noge"]
 polygon = PackedVector2Array(-97735, -33866, -97721, -33866, -97721, -33860, -97735, -33860)
 
-[sub_resource type="Resource" id="Resource_k1g2k"]
-script = ExtResource("7_j16qe")
-json_data = "[{
-\"id\":  \"building\"
-},
-{
-\"id\": \"key\",
-\"image\": \"res://ITEMs/Key.png\",
-\"stack_size_max\": 2
-},
-{
-\"id\": \"HPotion\",
-\"image\": \"res://ITEMs/healpotioninv.png\"
-},
-{
-\"id\": \"HPotions\",
-\"image\": \"res://ITEMs/healpotionsinv.png\"
-},
-{
-\"id\": \"sword    ATK: +3\",
-\"image\": \"res://ITEMs/NewSprite321.png\",
-\"label\": \"sword        ATK: +3\"
-},
-]"
-
 [sub_resource type="AudioStream" id="AudioStream_e5mg8"]
 
 [node name="World" type="Node2D"]
@@ -233,6 +207,7 @@ occluder = SubResource("OccluderPolygon2D_gy0dm")
 metadata/_edit_lock_ = true
 
 [node name="Location" type="Node2D" parent="."]
+position = Vector2(0, -38)
 
 [node name="vrag" parent="." node_paths=PackedStringArray("per") instance=ExtResource("4_xs1u7")]
 position = Vector2(122, 409)
@@ -254,28 +229,22 @@ collision_mask = 24
 zoom = Vector2(2, 2)
 metadata/_edit_lock_ = true
 
-[node name="CtrlInventory" type="Control" parent="Pers"]
-visible = false
-visibility_layer = 1048575
-z_index = 4096
-layout_mode = 3
-anchors_preset = 0
-offset_left = -262.0
-offset_top = -106.0
-offset_right = 261.0
-offset_bottom = 176.0
-script = ExtResource("8_pfxv0")
-inventory_path = NodePath("../../Node")
-default_item_icon = ExtResource("9_yxk7s")
+[node name="GridInventory" type="GridInventory" parent="Pers"]
+database = ExtResource("17_ikiii")
+
+[node name="GridInventoryPanel" parent="Pers" node_paths=PackedStringArray("inventory") instance=ExtResource("9_bc84e")]
+custom_minimum_size = Vector2(406, 200)
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 306.0
+offset_bottom = 228.0
+scale = Vector2(0.5, 0.5)
+inventory = NodePath("../GridInventory")
 
 [node name="Key" type="Sprite2D" parent="."]
-position = Vector2(419, 115)
+position = Vector2(538, 90)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_uuri6")
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("6_88ls3")
-item_protoset = SubResource("Resource_k1g2k")
 
 [node name="NewSprite321" type="Sprite2D" parent="."]
 position = Vector2(608, 361)
@@ -381,27 +350,32 @@ metadata/color_filter = Color(1, 1, 1, 0)
 metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-15, -80)
 stream = SubResource("AudioStream_e5mg8")
 autoplay = true
 
 [node name="Follower1" parent="." node_paths=PackedStringArray("target") instance=ExtResource("15_ln5rf")]
+position = Vector2(-25, 52)
 target = NodePath("../Pers")
 is_fighter = true
 
 [node name="Follower" parent="." node_paths=PackedStringArray("target") instance=ExtResource("15_ln5rf")]
+position = Vector2(-113, 157)
 target = NodePath("../Follower1")
 texture = ExtResource("16_ri3j2")
 
 [node name="Follower2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("15_ln5rf")]
+position = Vector2(-89, 51)
 target = NodePath("../Follower")
 texture = ExtResource("17_r5lav")
 
 [node name="Follower3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("15_ln5rf")]
+position = Vector2(-47, -25)
 target = NodePath("../Follower2")
 texture = ExtResource("18_mg2g7")
 
 [node name="Area2D" parent="." instance=ExtResource("19_dodp5")]
-position = Vector2(646, 417)
+position = Vector2(612, 423)
 
 [node name="LeonardoDiffusion house" type="Sprite2D" parent="."]
 position = Vector2(801.541, 270.969)
@@ -416,3 +390,15 @@ position = Vector2(992.301, 463.183)
 texture = ExtResource("19_dcilf")
 hframes = 2
 vframes = 2
+
+[node name="item_key" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_ikiii")]
+position = Vector2(913, 161)
+texture = ExtResource("5_uuri6")
+inventory_item_id = "key"
+player = NodePath("../Pers")
+
+[node name="item_sword" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_ikiii")]
+position = Vector2(851, 165)
+texture = ExtResource("12_32bro")
+inventory_item_id = "sword"
+player = NodePath("../Pers")

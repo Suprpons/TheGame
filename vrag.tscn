@@ -86,7 +86,7 @@ script = ExtResource("1_77xmv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_tgnkp")
+&"": SubResource("AnimationLibrary_tgnkp")
 }
 
 [node name="Screenshot2023-10-1719111473" type="Sprite2D" parent="."]

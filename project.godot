@@ -8,18 +8,17 @@
 
 config_version=5
 
-recent_projects=[]
+recent_projects=["res://adventure.quest", "res://side_quests.quest"]
 
 [application]
 
 config/name="TheGame"
-run/main_scene="res://pers.tscn"
+run/main_scene="uid://b4q85tg50lb5n"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-GLoot="*res://addons/gloot/gloot_autoload.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameState="*res://gameState.gd"
 QuestManager="*res://addons/quest_manager/QuestManager.gd"
@@ -27,7 +26,11 @@ betterinv="*res://addons/inventory-system/inventory-system.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/gloot/plugin.cfg", "res://addons/health_bar_2d/plugin.cfg", "res://addons/quest_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/health_bar_2d/plugin.cfg", "res://addons/inventory-system/plugin.cfg", "res://addons/quest_manager/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+
+[gloot]
+
+inspector_control_height=200
 
 [input]
 

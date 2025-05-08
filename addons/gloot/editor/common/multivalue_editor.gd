@@ -1,17 +1,14 @@
 extends GridContainer
 
-signal value_changed(value_index)
+signal value_changed(value_index: int)
 
+const _Utils = preload("res://addons/gloot/core/utils.gd")
 
-var values: Array = [] :
-    get:
-        return values
+var values: Array = []:
     set(new_values):
         assert(!is_inside_tree(), "Can't set values once the node is inside a tree")
         values = new_values
-var titles: Array = [] :
-    get:
-        return titles
+var titles: Array = []:
     set(new_titles):
         assert(!is_inside_tree(), "Can't set titles once the node is inside a tree")
         titles = new_titles
@@ -35,8 +32,8 @@ func _ready() -> void:
         var line_edit: LineEdit = LineEdit.new()
         line_edit.text = var_to_str(values[i])
         line_edit.size_flags_horizontal = SIZE_EXPAND_FILL
-        line_edit.text_submitted.connect(Callable(self, "_on_line_edit_value_entered").bind(line_edit, i))
-        line_edit.focus_exited.connect(Callable(self, "_on_line_edit_focus_exited").bind(line_edit, i))
+        line_edit.text_submitted.connect(_on_line_edit_value_entered.bind(line_edit, i))
+        line_edit.focus_exited.connect(_on_line_edit_focus_exited.bind(line_edit, i))
         line_edit.editable = enabled
         hbox.add_child(line_edit)
 
@@ -48,9 +45,11 @@ func _on_line_edit_value_entered(_text: String, line_edit: LineEdit, idx: int) -
 
 
 func _on_line_edit_focus_exited(line_edit: LineEdit, idx: int) -> void:
-    var value = str_to_var(line_edit.text)
+    var value = _Utils.str_to_var(line_edit.text)
     if typeof(value) != type:
         line_edit.text = var_to_str(values[idx])
+        return
+    if value == values[idx]:
         return
     values[idx] = value
     value_changed.emit(idx)

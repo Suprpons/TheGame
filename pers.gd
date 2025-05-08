@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var ap = $AnimationPlayer
 @onready var sp = $Sprite2D
 @onready var sword = $Sprite2D2
+@onready var inv = $GridInventory
 
 var dialogue_active = false
 var speed = 100  # speed in pixels/sec
@@ -98,3 +99,6 @@ func _physics_process(_delta):
     print(dialogue_active)
 #  if DialogueManager.dialogue_ended:
 #    dialogue_close()
+
+func pick(item_id: String):
+    inv.add(item_id)

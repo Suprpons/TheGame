@@ -1,46 +1,17 @@
 @tool
+@icon("res://addons/gloot/images/icon_ctrl_item_slot.svg")
 class_name CtrlItemSlot
 extends Control
+## A control node representing an inventory slot (`ItemSlot`).
+##
+## Displays the currently equipped item with a configurable background.
 
 
-@export var item_slot_path: NodePath :
-    get:
-        return item_slot_path
-    set(new_item_slot_path):
-        item_slot_path = new_item_slot_path
-        var node: Node = get_node_or_null(item_slot_path)
-        
-        if node == null:
-            return
+const _CtrlDraggableInventoryItem = preload("res://addons/gloot/ui/ctrl_draggable_inventory_item.gd")
+const _Utils = preload("res://addons/gloot/core/utils.gd")
 
-        if is_inside_tree():
-            assert(node is ItemSlot)
-            
-        self.item_slot = node
-        update_configuration_warnings()
-@export var default_item_icon: Texture2D :
-    get:
-        return default_item_icon
-    set(new_default_item_icon):
-        default_item_icon = new_default_item_icon
-        _refresh()
-@export var item_texture_visible: bool = true :
-    get:
-        return item_texture_visible
-    set(new_item_texture_visible):
-        item_texture_visible = new_item_texture_visible
-        if _texture_rect:
-            _texture_rect.visible = item_texture_visible
-@export var label_visible: bool = true :
-    get:
-        return label_visible
-    set(new_label_visible):
-        label_visible = new_label_visible
-        if _label:
-            _label.visible = label_visible
-var item_slot: ItemSlot :
-    get:
-        return item_slot
+## Reference to the item slot that is being displayed.
+@export var item_slot: ItemSlot:
     set(new_item_slot):
         if new_item_slot == item_slot:
             return
@@ -50,126 +21,167 @@ var item_slot: ItemSlot :
         _connect_item_slot_signals()
         
         _refresh()
-var _hbox_container: HBoxContainer
-var _texture_rect: TextureRect
-var _label: Label
-var _gloot: Node = null
 
+@export_group("Icon Behavior", "icon_")
+## Controls the item icon behavior when resizing the node's bounding rectangle. See the `TextureRect.StretchMode`
+## constants for details.
+@export var icon_stretch_mode: TextureRect.StretchMode = TextureRect.StretchMode.STRETCH_KEEP_CENTERED:
+    set(new_icon_stretch_mode):
+        if icon_stretch_mode == new_icon_stretch_mode:
+            return
+        icon_stretch_mode = new_icon_stretch_mode
+        if is_instance_valid(_ctrl_draggable_inventory_item):
+            _ctrl_draggable_inventory_item.icon_stretch_mode = icon_stretch_mode
 
-func _get_configuration_warnings() -> PackedStringArray:
-    if item_slot_path.is_empty():
-        return PackedStringArray([
-            "This node is not linked to an item slot, so it can't display any content.\n" + \
-            "Set the item_slot_path property to point to an ItemSlot node."])
-    return PackedStringArray()
+@export_group("Custom Styles")
+## The slot background style.
+@export var slot_style: StyleBox:
+    set(new_slot_style):
+        if slot_style == new_slot_style:
+            return
+        slot_style = new_slot_style
+        _refresh()
+## The slot background style when the mouse cursor hovers over the slot.
+@export var slot_highlighted_style: StyleBox:
+    set(new_slot_highlighted_style):
+        if slot_highlighted_style == new_slot_highlighted_style:
+            return
+        slot_highlighted_style = new_slot_highlighted_style
+        _refresh()
+
+var _background_panel: Panel
+var _ctrl_draggable_inventory_item: _CtrlDraggableInventoryItem
 
 
 func _connect_item_slot_signals() -> void:
-    if !item_slot:
+    if !is_instance_valid(item_slot):
         return
-
-    if !item_slot.item_set.is_connected(Callable(self, "_on_item_set")):
-        item_slot.item_set.connect(Callable(self, "_on_item_set"))
-    if !item_slot.item_cleared.is_connected(Callable(self, "_refresh")):
-        item_slot.item_cleared.connect(Callable(self, "_refresh"))
-    if !item_slot.inventory_changed.is_connected(Callable(self, "_on_inventory_changed")):
-        item_slot.inventory_changed.connect(Callable(self, "_on_inventory_changed"))
+    _Utils.safe_connect(item_slot.item_equipped, _refresh)
+    _Utils.safe_connect(item_slot.cleared, _on_item_slot_cleared)
 
 
 func _disconnect_item_slot_signals() -> void:
-    if !item_slot:
+    if !is_instance_valid(item_slot):
         return
-
-    if item_slot.item_set.is_connected(Callable(self, "_on_item_set")):
-        item_slot.item_set.disconnect(Callable(self, "_on_item_set"))
-    if item_slot.item_cleared.is_connected(Callable(self, "_refresh")):
-        item_slot.item_cleared.disconnect(Callable(self, "_refresh"))
-    if item_slot.inventory_changed.is_connected(Callable(self, "_on_inventory_changed")):
-        item_slot.inventory_changed.disconnect(Callable(self, "_on_inventory_changed"))
+    _Utils.safe_disconnect(item_slot.item_equipped, _refresh)
+    _Utils.safe_disconnect(item_slot.cleared, _on_item_slot_cleared)
 
 
-func _on_item_set(_item: InventoryItem) -> void:
-    _refresh()
-
-
-func _on_inventory_changed(_inventory: Inventory) -> void:
+func _on_item_slot_cleared(item: InventoryItem) -> void:
     _refresh()
 
 
 func _ready():
-    _gloot = _get_gloot()
+    _background_panel = Panel.new()
+    _background_panel.size = size
+    _background_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    _set_panel_style(_background_panel, slot_style)
+    add_child(_background_panel)
 
-    if Engine.is_editor_hint():
-        # Clean up, in case it is duplicated in the editor
-        if _hbox_container:
-            _hbox_container.queue_free()
+    _ctrl_draggable_inventory_item = _CtrlDraggableInventoryItem.new()
+    _ctrl_draggable_inventory_item.icon_stretch_mode = icon_stretch_mode
+    _ctrl_draggable_inventory_item.size = size
+    add_child(_ctrl_draggable_inventory_item)
 
-    _hbox_container = HBoxContainer.new()
-    _hbox_container.size_flags_horizontal = SIZE_EXPAND_FILL
-    _hbox_container.size_flags_vertical = SIZE_EXPAND_FILL
-    add_child(_hbox_container)
-
-    _texture_rect = TextureRect.new()
-    _texture_rect.visible = item_texture_visible
-    _hbox_container.add_child(_texture_rect)
-
-    _label = Label.new()
-    _label.visible = label_visible
-    _hbox_container.add_child(_label)
-
-    var node: Node = get_node_or_null(item_slot_path)
-    if is_inside_tree() && node:
-        assert(node is ItemSlot)
-    self.item_slot = node
+    resized.connect(func():
+        if is_instance_valid(_background_panel):
+            _background_panel.size = size
+        if is_instance_valid(_ctrl_draggable_inventory_item):
+            _ctrl_draggable_inventory_item.size = size
+    )
 
     _refresh()
-    if !Engine.is_editor_hint() && _gloot:
-        _gloot.item_dropped.connect(Callable(self, "_on_item_dropped"))
 
 
-func _get_gloot() -> Node:
-    # This is a "temporary" hack until a better solution is found!
-    # This is a tool script that is also executed inside the editor, where the "GLoot" singleton is
-    # not visible - leading to errors inside the editor.
-    # To work around that, we obtain the singleton by name.
-    return get_tree().root.get_node_or_null("GLoot")
+func _can_drop_data(at_position: Vector2, data) -> bool:
+    return data is InventoryItem
 
 
-func _get_singleton() -> Node:
-    return null
+func _drop_data(at_position: Vector2, data) -> void:
+    var item := (data as InventoryItem)
+    if is_instance_valid(item):
+        _on_item_dropped(item, at_position)
 
 
-func _on_item_dropped(wr_item: WeakRef, global_drop_pos: Vector2) -> void:
-    var item: InventoryItem = wr_item.get_ref()
+func _notification(what):
+    if what == NOTIFICATION_DRAG_BEGIN:
+        _ctrl_draggable_inventory_item.mouse_filter = Control.MOUSE_FILTER_IGNORE
+    elif what == NOTIFICATION_DRAG_END:
+        _ctrl_draggable_inventory_item.mouse_filter = Control.MOUSE_FILTER_PASS
+
+
+func _on_item_dropped(item: InventoryItem, drop_position: Vector2) -> void:
     if !item:
         return
-    if !item_slot:
+    if !is_instance_valid(item_slot):
         return
         
-    var slot_rect = get_global_rect()
-    if slot_rect.has_point(get_global_mouse_position()) && item_slot.can_hold_item(item):
-        item_slot.item = item
+    if !item_slot.can_hold_item(item):
+        return
+
+    if item == item_slot.get_item():
+        return
+
+    if _join_stacks(item_slot.get_item(), item):
+        return
+
+    if _swap_items(item_slot.get_item(), item):
+        return
+        
+    if item_slot.get_item() == null:
+        item_slot.equip(item)
+
+
+func _join_stacks(item_dst: InventoryItem, item_src: InventoryItem) -> bool:
+    if item_dst == null:
+        return false
+    if !is_instance_valid(item_dst.get_inventory()):
+        return false
+    return item_src.merge_into(item_dst)
+
+
+func _swap_items(item1: InventoryItem, item2: InventoryItem) -> bool:
+    if item_slot.get_item() == null:
+        return false
+
+    return InventoryItem.swap(item1, item2)
 
 
 func _refresh() -> void:
     _clear()
 
-    if item_slot == null:
-        return
-    
-    if item_slot.item == null:
+    if !is_instance_valid(item_slot):
         return
 
-    var item = item_slot.item
-    if _label:
-        _label.text = item.get_property(CtrlInventory.KEY_NAME, item.prototype_id)
-    if _texture_rect:
-        _texture_rect.texture = item.get_texture()
+    var item = item_slot.get_item()
+    if !is_instance_valid(item):
+        return
+        
+    if is_instance_valid(_ctrl_draggable_inventory_item):
+        _ctrl_draggable_inventory_item.item = item
 
 
 func _clear() -> void:
-    if _label:
-        _label.text = ""
-    if _texture_rect:
-        _texture_rect.texture = null
+    if is_instance_valid(_ctrl_draggable_inventory_item):
+        _ctrl_draggable_inventory_item.item = null
 
+
+func _set_panel_style(panel: Panel, style: StyleBox) -> void:
+    panel.remove_theme_stylebox_override("panel")
+    if style != null:
+        panel.add_theme_stylebox_override("panel", style)
+
+
+func _input(event) -> void:
+    if event is InputEventMouseMotion:
+        if !is_instance_valid(_background_panel):
+            return
+
+        if get_global_rect().has_point(get_global_mouse_position()) && slot_highlighted_style:
+            _set_panel_style(_background_panel, slot_highlighted_style)
+            return
+        
+        if slot_style:
+            _set_panel_style(_background_panel, slot_style)
+        else:
+            _background_panel.hide()

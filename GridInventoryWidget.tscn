@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bp2mepsumto04"]
+
+[ext_resource type="PackedScene" uid="uid://1dijqt6vr078" path="res://addons/inventory-system-demos/ui/grid/grid_inventory_panel.tscn" id="2_4aliv"]
+
+[node name="GridInventoryWidget" type="PanelContainer"]
+metadata/_custom_type_script = "uid://d0wo2gh3a0u7j"
+
+[node name="GridInventoryPanel1" parent="." node_paths=PackedStringArray("inventory") instance=ExtResource("2_4aliv")]
+custom_minimum_size = Vector2(256, 288)
+layout_mode = 2
+inventory = NodePath("")
+
+[editable path="GridInventoryPanel1"]
