@@ -1,20 +1,22 @@
 extends Node2D
 
-@onready var key = $Key
-@onready var per = $Pers
-@onready var inv: Inventory = $PlayerInventory
-@onready var cinv = $Pers/GridInventoryUIiiiiii
-@onready var HPotion = $Healpotion
-@onready var HPotions = $Healpotionsanim
-@onready var sword = $NewSprite321
-@onready var vr = $vrag
+#@onready var key = $Key
+#@onready var per = $Pers
+
+#@onready var inv: Inventory = $PlayerInventory
+@onready var inventory_widget = $Pers/GridInventoryPanel
+
+#@onready var HPotion = $Healpotion
+#@onready var HPotions = $Healpotionsanim
+#@onready var sword = $NewSprite321
+#@onready var vr = $vrag
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    per.kryak.connect(gameover)
+    $Pers.kryak.connect(gameover)
 
 func gameover():
-    $RichTextLabel.visible = true
+    $GameOverText.visible = true
     await get_tree().create_timer(3).timeout
     get_tree().reload_current_scene()
 
@@ -24,7 +26,7 @@ func _process(delta):
     #print(per.health)
 #    look_at(per.global_position)
     if Input.is_action_just_released("ui_inventory"):
-         cinv.visible = !cinv.visible
+         inventory_widget.visible = !inventory_widget.visible
     #if Input.is_action_just_released("ui_use"): 
         #if !!key:
             #if (key.global_position.distance_to(per.global_position)) < 50:

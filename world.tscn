@@ -233,6 +233,9 @@ metadata/_edit_lock_ = true
 database = ExtResource("17_ikiii")
 
 [node name="GridInventoryPanel" parent="Pers" node_paths=PackedStringArray("inventory") instance=ExtResource("9_bc84e")]
+visible = false
+z_index = 10
+y_sort_enabled = true
 custom_minimum_size = Vector2(406, 200)
 offset_left = -100.0
 offset_top = -60.0
@@ -251,7 +254,7 @@ position = Vector2(608, 361)
 scale = Vector2(0.25, 0.225)
 texture = ExtResource("12_32bro")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="GameOverText" type="RichTextLabel" parent="."]
 visible = false
 z_index = 10
 offset_left = 390.0
