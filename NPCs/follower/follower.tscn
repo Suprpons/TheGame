@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://dtf5hvms31lpo"]
 
-[ext_resource type="Script" path="res://NPCs/follower/follower.gd" id="1_jyorp"]
+[ext_resource type="Script" uid="uid://bak3i2quo04b5" path="res://NPCs/follower/follower.gd" id="1_jyorp"]
 [ext_resource type="Texture2D" uid="uid://ba18py8654due" path="res://NPCs/follower/default_sprite.png" id="2_widq6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jxsik"]
@@ -89,18 +89,18 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gooxu"]
 _data = {
-"lay": SubResource("Animation_8a1cd"),
-"run_down": SubResource("Animation_8inji"),
-"run_right": SubResource("Animation_f73fk"),
-"run_up": SubResource("Animation_lr7t0"),
-"stand_down": SubResource("Animation_vewpj"),
-"stand_right": SubResource("Animation_s23cd"),
-"stand_up": SubResource("Animation_yjlrh"),
-"wait": SubResource("Animation_twanf"),
-"wait_nervous": SubResource("Animation_xjg2j"),
-"walk_down": SubResource("Animation_rh806"),
-"walk_right": SubResource("Animation_wl4ib"),
-"walk_up": SubResource("Animation_igh2m")
+&"lay": SubResource("Animation_8a1cd"),
+&"run_down": SubResource("Animation_8inji"),
+&"run_right": SubResource("Animation_f73fk"),
+&"run_up": SubResource("Animation_lr7t0"),
+&"stand_down": SubResource("Animation_vewpj"),
+&"stand_right": SubResource("Animation_s23cd"),
+&"stand_up": SubResource("Animation_yjlrh"),
+&"wait": SubResource("Animation_twanf"),
+&"wait_nervous": SubResource("Animation_xjg2j"),
+&"walk_down": SubResource("Animation_rh806"),
+&"walk_right": SubResource("Animation_wl4ib"),
+&"walk_up": SubResource("Animation_igh2m")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ajkcl"]

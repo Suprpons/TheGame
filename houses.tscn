@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://0280edgu5vxe"]
 
-[ext_resource type="Script" path="res://houses.gd" id="1_koevv"]
+[ext_resource type="Script" uid="uid://bc7iy1ybibdo" path="res://houses.gd" id="1_koevv"]
 [ext_resource type="Texture2D" uid="uid://2khttsbkuc1m" path="res://house1.png" id="2_pu7ek"]
 
 [sub_resource type="Animation" id="Animation_j8k88"]
@@ -39,8 +39,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s0du7"]
 _data = {
-"closed": SubResource("Animation_j8k88"),
-"open": SubResource("Animation_phan1")
+&"closed": SubResource("Animation_j8k88"),
+&"open": SubResource("Animation_phan1")
 }
 
 [node name="Houses" type="Node2D"]

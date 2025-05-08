@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dirh1n1wsgfst"]
 
-[ext_resource type="Script" path="res://addons/quest_manager/Editor/Nodes/Quest_Rewards.gd" id="1_y2wej"]
+[ext_resource type="Script" uid="uid://dbw5a844pvvpx" path="res://addons/quest_manager/Editor/Nodes/Quest_Rewards.gd" id="1_y2wej"]
 
 [node name="8d6b4b46a5" type="GraphNode"]
 custom_minimum_size = Vector2(250, 150)

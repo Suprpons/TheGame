@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://k1l6ck8je6mh"]
 
 [ext_resource type="Texture2D" uid="uid://cxhcx7k7fhvgv" path="res://New Piskel.png" id="1_mepro"]
-[ext_resource type="Script" path="res://sword.gd" id="2_chl3d"]
+[ext_resource type="Script" uid="uid://b0atld2ywm1im" path="res://sword.gd" id="2_chl3d"]
 
 [sub_resource type="Animation" id="Animation_b3pno"]
 resource_name = "swing forward"
@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4itq2"]
 _data = {
-"swing forward": SubResource("Animation_b3pno")
+&"swing forward": SubResource("Animation_b3pno")
 }
 
 [node name="Sprite2D" type="Sprite2D"]

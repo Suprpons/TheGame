@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://bi0whlj2sb74h"]
 
-[ext_resource type="Script" path="res://pers.gd" id="1_hw5xl"]
+[ext_resource type="Script" uid="uid://d35b8h0epg5tc" path="res://pers.gd" id="1_hw5xl"]
 [ext_resource type="Texture2D" uid="uid://bcmmmruq1lx4b" path="res://spritesheets/Screenshot_2023-9-10_205626109.png" id="2_prly6"]
 [ext_resource type="Texture2D" uid="uid://cnjw8wn77f05i" path="res://addons/health_bar_2d/resources/health_bar_texture.png" id="3_6jyhj"]
-[ext_resource type="Script" path="res://addons/health_bar_2d/health_bar_2d.gd" id="3_pj3fp"]
+[ext_resource type="Script" uid="uid://ct0xyqa0bwxwi" path="res://addons/health_bar_2d/health_bar_2d.gd" id="3_pj3fp"]
 [ext_resource type="Texture2D" uid="uid://da1qhm77crs0o" path="res://images/particles_flipbook_example.png" id="5_pby51"]
 
 [sub_resource type="Animation" id="Animation_or80t"]
@@ -93,11 +93,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ybmb6"]
 _data = {
-"attack1": SubResource("Animation_or80t"),
-"down": SubResource("Animation_mwmon"),
-"right": SubResource("Animation_t85kj"),
-"stand": SubResource("Animation_di8sx"),
-"up": SubResource("Animation_khq6a")
+&"attack1": SubResource("Animation_or80t"),
+&"down": SubResource("Animation_mwmon"),
+&"right": SubResource("Animation_t85kj"),
+&"stand": SubResource("Animation_di8sx"),
+&"up": SubResource("Animation_khq6a")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ppwb"]

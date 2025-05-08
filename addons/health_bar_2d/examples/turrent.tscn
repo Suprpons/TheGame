@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7w7epnvdwsos"]
 
-[ext_resource type="Script" path="res://addons/health_bar_2d/examples/turrent.gd" id="1"]
-[ext_resource type="PackedScene" path="res://addons/health_bar_2d/examples/bullet.tscn" id="2"]
+[ext_resource type="Script" uid="uid://dca4b4dkdla64" path="res://addons/health_bar_2d/examples/turrent.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dxbtixm4etk1c" path="res://addons/health_bar_2d/examples/bullet.tscn" id="2"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 89.0056

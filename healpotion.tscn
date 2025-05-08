@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://df5nlxpat2sgk"]
 
 [ext_resource type="Texture2D" uid="uid://bj6u2ic10jox7" path="res://ITEMs/healpotion.png" id="1_sdima"]
-[ext_resource type="Script" path="res://healpotion.gd" id="2_a1vm4"]
+[ext_resource type="Script" uid="uid://ctqspwj6aqhoi" path="res://healpotion.gd" id="2_a1vm4"]
 
 [sub_resource type="Animation" id="Animation_4ypyt"]
 resource_name = "bul bul"
@@ -21,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqkf4"]
 _data = {
-"bul bul": SubResource("Animation_4ypyt")
+&"bul bul": SubResource("Animation_4ypyt")
 }
 
 [node name="Healpotion" type="Sprite2D"]

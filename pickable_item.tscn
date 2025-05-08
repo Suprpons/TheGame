@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://54er1kef8y35"]
 
-[ext_resource type="Script" path="res://pickable_item.gd" id="1_lw8n2"]
+[ext_resource type="Script" uid="uid://yi420iv6q8g5" path="res://pickable_item.gd" id="1_lw8n2"]
 
 [node name="PickableItem" type="Sprite2D"]
 script = ExtResource("1_lw8n2")

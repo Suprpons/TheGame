@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dh2m1f5rfq77i"]
 
 [ext_resource type="Texture2D" uid="uid://cbj2fylcy4g6m" path="res://New Piskel (1).png" id="1_erim3"]
-[ext_resource type="Script" path="res://landingsun.gd" id="1_weoul"]
-[ext_resource type="Script" path="res://animationprocess.gd" id="2_llbgu"]
+[ext_resource type="Script" uid="uid://b0kptmitertwq" path="res://landingsun.gd" id="1_weoul"]
+[ext_resource type="Script" uid="uid://kno8gvu5r3ce" path="res://animationprocess.gd" id="2_llbgu"]
 
 [sub_resource type="Animation" id="Animation_teaik"]
 resource_name = "stand"
@@ -22,7 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lmeui"]
 _data = {
-"stand": SubResource("Animation_teaik")
+&"stand": SubResource("Animation_teaik")
 }
 
 [node name="Area2D" type="Area2D"]

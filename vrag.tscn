@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bd5ahwjcg24tf"]
 
-[ext_resource type="Script" path="res://vragtop.gd" id="1_77xmv"]
+[ext_resource type="Script" uid="uid://ck3uqr6sdpl14" path="res://vragtop.gd" id="1_77xmv"]
 [ext_resource type="Texture2D" uid="uid://bus6p3d0yxsjb" path="res://spritesheets/Screenshot_2023-10-17_19111473.png" id="2_fjq76"]
 
 [sub_resource type="Animation" id="Animation_wtm8n"]
@@ -72,10 +72,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tgnkp"]
 _data = {
-"vrag forward": SubResource("Animation_wtm8n"),
-"vrag nazad": SubResource("Animation_2puj4"),
-"vrag stand": SubResource("Animation_h42ip"),
-"vrag vprava": SubResource("Animation_gu1of")
+&"vrag forward": SubResource("Animation_wtm8n"),
+&"vrag nazad": SubResource("Animation_2puj4"),
+&"vrag stand": SubResource("Animation_h42ip"),
+&"vrag vprava": SubResource("Animation_gu1of")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eqf0x"]
