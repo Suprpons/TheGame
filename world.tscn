@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://b4q85tg50lb5n"]
+[gd_scene load_steps=25 format=3 uid="uid://b4q85tg50lb5n"]
 
 [ext_resource type="Script" uid="uid://dlaeunmlxshlj" path="res://World.gd" id="1_sie2j"]
 [ext_resource type="Texture2D" uid="uid://cqcqf2kp1sx1" path="res://tilesets/tileset_grassland.png" id="2_kc3mc"]
 [ext_resource type="PackedScene" uid="uid://bi0whlj2sb74h" path="res://pers.tscn" id="2_s275l"]
 [ext_resource type="PackedScene" uid="uid://bd5ahwjcg24tf" path="res://vrag.tscn" id="4_xs1u7"]
 [ext_resource type="Texture2D" uid="uid://dsqnv7hxxayak" path="res://ITEMs/Key.png" id="5_uuri6"]
+[ext_resource type="PackedScene" uid="uid://dvba1x26o0ot8" path="res://quests/widgets/QuestsPanel.tscn" id="7_cbp6q"]
 [ext_resource type="PackedScene" uid="uid://1dijqt6vr078" path="res://addons/inventory-system-demos/ui/grid/grid_inventory_panel.tscn" id="9_bc84e"]
 [ext_resource type="Texture2D" uid="uid://dpjfm86nkihhx" path="res://ITEMs/NewSprite321.png" id="12_32bro"]
 [ext_resource type="Texture2D" uid="uid://cqi3j01138p81" path="res://Screenshot 2023-11-30 at 16.19.16 copy.png" id="14_m2fld"]
@@ -243,6 +244,10 @@ offset_right = 306.0
 offset_bottom = 228.0
 scale = Vector2(0.5, 0.5)
 inventory = NodePath("../GridInventory")
+
+[node name="QuestsPanel" parent="Pers" instance=ExtResource("7_cbp6q")]
+offset_left = 2.0
+offset_right = 234.0
 
 [node name="Key" type="Sprite2D" parent="."]
 position = Vector2(538, 90)

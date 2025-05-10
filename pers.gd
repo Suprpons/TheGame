@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @onready var ap = $AnimationPlayer
 @onready var sp = $Sprite2D
-@onready var sword = $Sprite2D2
 @onready var inv = $GridInventory
 
 var dialogue_active = false
@@ -17,16 +16,9 @@ signal damage(how_much)
 var timer : Timer
 var modc : Color
 
-
-func wait(number):
-  return get_tree().create_timer(number).timeout
-
-
-
-
 func hit_particles():
   $GPUParticles2D.show()
-  await wait(1)
+  await util.wait(1)
   $GPUParticles2D.hide()
 
 
@@ -39,7 +31,7 @@ func _ready() -> void:
     DialogueManager.dialogue_ended.connect(dialogue_close)
       
 func dialogue_close(resource):
-  await get_tree().create_timer(0.3).timeout
+  await util.wait(0.3)
   print('hateuworks')
   if dialogue_active == true:
     dialogue_active = false

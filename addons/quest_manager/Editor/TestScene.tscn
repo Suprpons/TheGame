@@ -34,10 +34,12 @@ theme_override_constants/margin_bottom = 10
 [node name="Tabs" type="TabContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
 tab_alignment = 1
+current_tab = 0
 
 [node name="Available Quests" type="Control" parent="Panel/MarginContainer/Tabs"]
 layout_mode = 2
 script = ExtResource("2_h4po8")
+metadata/_tab_index = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Tabs/Available Quests"]
 layout_mode = 1
@@ -133,6 +135,7 @@ text = "ACCEPT QUEST"
 visible = false
 layout_mode = 2
 script = ExtResource("2_6skof")
+metadata/_tab_index = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/Tabs/Player Quests"]
 layout_mode = 1
