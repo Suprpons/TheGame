@@ -17,5 +17,6 @@ func _ready():
     %QuestStep.step_name = step["details"]
     %QuestStep.collected = 0
     %QuestStep.total_required = 5
-    #pass
+    %QuestStep.render()
+
     
