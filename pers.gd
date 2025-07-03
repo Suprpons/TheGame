@@ -7,6 +7,7 @@ extends CharacterBody2D
 var dialogue_active = false
 var speed = 100  # speed in pixels/sec
 var health := 100
+var current_quest : String = ''
 
 signal health_changed
 signal kryak
@@ -29,7 +30,13 @@ func _ready() -> void:
     emit_signal("health_changed", health)
     damage.connect(on_damage)
     DialogueManager.dialogue_ended.connect(dialogue_close)
-      
+    QuestManager.quest_completed.connect(_on_quest_complete)
+
+func _on_quest_complete(quest_name, rewards):
+    print("quest complete in pers", quest_name, "rewards", rewards)
+    for key in rewards.keys():
+        inv.add(key, rewards[key])
+
 func dialogue_close(resource):
   await util.wait(0.3)
   print('hateuworks')
@@ -91,6 +98,16 @@ func _physics_process(_delta):
     print(dialogue_active)
 #  if DialogueManager.dialogue_ended:
 #    dialogue_close()
+  if Input.is_action_just_released("test_action"):
+    #current_quest = "find da sord"
+    current_quest = "get da key"
+    GameState.accept_quest("first_steps", current_quest)
 
 func pick(item_id: String):
+    # check quests needs item
+    QuestManager.progress_quest(current_quest, item_id)
+    game_action("now you need a shield")
     inv.add(item_id)
+
+func game_action(action: String):
+    QuestManager.progress_quest(current_quest, action)
