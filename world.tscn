@@ -15,12 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://btlntd6b7un6a" path="res://spritesheets/pers2.png" id="17_r5lav"]
 [ext_resource type="PackedScene" uid="uid://54er1kef8y35" path="res://pickable_item.tscn" id="18_ikiii"]
 [ext_resource type="Texture2D" uid="uid://bcmmmruq1lx4b" path="res://spritesheets/Screenshot_2023-9-10_205626109.png" id="18_mg2g7"]
-[ext_resource type="Texture2D" uid="uid://bly4tvxyih1dc" path="res://healpotion anim.png" id="19_26xuy"]
 [ext_resource type="Texture2D" uid="uid://bp3wgadb4evlj" path="res://healpotionsanim.png" id="19_dcilf"]
 [ext_resource type="PackedScene" uid="uid://dh2m1f5rfq77i" path="res://landingsun.tscn" id="19_dodp5"]
 [ext_resource type="Texture2D" uid="uid://c8xgb2ruh65we" path="res://Leonardo_Diffusion_XL_pixel_art_house_topdown_front_view_0.png" id="19_he81p"]
 [ext_resource type="PackedScene" uid="uid://df5nlxpat2sgk" path="res://healpotion.tscn" id="19_ymq3t"]
-[ext_resource type="PackedScene" uid="uid://bdbu5fx8dfhoq" path="res://washmashin.tscn" id="21_bc84e"]
+[ext_resource type="FontFile" uid="uid://dmphmomidbb4l" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="20_bc84e"]
+[ext_resource type="Script" uid="uid://d4eswivtt24yr" path="res://addons/fontawesome/FontAwesome.gd" id="21_wukud"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w5fvk"]
 texture = ExtResource("2_kc3mc")
@@ -224,12 +224,13 @@ occluder = SubResource("OccluderPolygon2D_1noge")
 [node name="Pers" parent="." groups=["Player", "hitable"] instance=ExtResource("2_s275l")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(542.893, 312.668)
+position = Vector2(708, 127)
 collision_layer = 24
 collision_mask = 24
 
 [node name="Camera2D" type="Camera2D" parent="Pers"]
 zoom = Vector2(2, 2)
+metadata/_edit_lock_ = true
 
 [node name="GridInventory" type="GridInventory" parent="Pers"]
 database = ExtResource("17_ikiii")
@@ -239,16 +240,21 @@ visible = false
 z_index = 10
 y_sort_enabled = true
 custom_minimum_size = Vector2(406, 200)
-offset_left = -100.0
-offset_top = -60.0
-offset_right = 306.0
-offset_bottom = 228.0
+offset_left = -283.0
+offset_top = -102.0
+offset_right = 123.0
+offset_bottom = 186.0
 scale = Vector2(0.5, 0.5)
 inventory = NodePath("../GridInventory")
 
 [node name="QuestsPanel" parent="Pers" instance=ExtResource("7_cbp6q")]
-offset_left = 2.0
-offset_right = 234.0
+z_index = 10
+offset_left = 169.0
+offset_top = -157.0
+offset_right = 401.0
+offset_bottom = 17.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(0.5, 0)
 
 [node name="Key" type="Sprite2D" parent="."]
 position = Vector2(538, 90)
@@ -387,21 +393,12 @@ texture = ExtResource("18_mg2g7")
 position = Vector2(612, 423)
 
 [node name="LeonardoDiffusion house" type="Sprite2D" parent="."]
-position = Vector2(801.541, 270.969)
+position = Vector2(805, 263)
 scale = Vector2(0.800251, 0.825379)
 texture = ExtResource("19_he81p")
 
 [node name="Healpotion" parent="." instance=ExtResource("19_ymq3t")]
 position = Vector2(1079.9, 374.166)
-
-[node name="PickableItem" parent="Healpotion" node_paths=PackedStringArray("player") instance=ExtResource("18_ikiii")]
-position = Vector2(-94.9066, -223.099)
-scale = Vector2(2.76077, 2.84665)
-texture = ExtResource("19_26xuy")
-hframes = 2
-vframes = 2
-inventory_item_id = "HPotion"
-player = NodePath("../../Pers")
 
 [node name="Healpotionsanim" type="Sprite2D" parent="."]
 position = Vector2(992.301, 463.183)
@@ -416,10 +413,23 @@ inventory_item_id = "key"
 player = NodePath("../Pers")
 
 [node name="item_sword" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_ikiii")]
-position = Vector2(851, 165)
+position = Vector2(858, 158)
 texture = ExtResource("12_32bro")
 inventory_item_id = "sword"
 player = NodePath("../Pers")
 
-[node name="wash_mashin" parent="." instance=ExtResource("21_bc84e")]
-position = Vector2(156.154, 158.528)
+[node name="FontAwesome" type="Label" parent="."]
+auto_translate_mode = 2
+offset_left = 180.0
+offset_top = 80.0
+offset_right = 196.0
+offset_bottom = 96.0
+localize_numeral_system = false
+theme_override_colors/font_color = Color(0, 0, 0.854902, 1)
+theme_override_fonts/font = ExtResource("20_bc84e")
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("21_wukud")
+metadata/_custom_type_script = "uid://d4eswivtt24yr"

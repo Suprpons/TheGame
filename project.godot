@@ -19,15 +19,15 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameState="*res://gameState.gd"
 QuestManager="*res://addons/quest_manager/QuestManager.gd"
+GameState="*res://gameState.gd"
 betterinv="*res://addons/inventory-system/inventory-system.gd"
 util="*res://boot/utils.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/health_bar_2d/plugin.cfg", "res://addons/inventory-system/plugin.cfg", "res://addons/quest_manager/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/fontawesome/plugin.cfg", "res://addons/health_bar_2d/plugin.cfg", "res://addons/inventory-system/plugin.cfg", "res://addons/quest_manager/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [gloot]
 

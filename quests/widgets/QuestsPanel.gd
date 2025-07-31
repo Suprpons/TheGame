@@ -5,6 +5,7 @@ extends Panel
 
 func _ready():
     QuestManager.new_quest_added.connect(_on_quest_added)
+    QuestManager.quest_completed.connect(_on_quest_complete)
 
 #func add_quest():
     #var QuestPanelScene = load("res://quests/widgets/quest_panel.tscn")
@@ -27,3 +28,6 @@ func _on_quest_added(quest_name):
     container.add_child(quest_panel)
     print("added quest")
     
+func _on_quest_complete(quest_name, rewards):
+    print("rewards", rewards)
+    var quest = container.get_child(0)
