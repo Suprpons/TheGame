@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdbu5fx8dfhoq"]
+
+[ext_resource type="Texture2D" uid="uid://cyv1fgujnogin" path="res://washmashinfull.png" id="1_6fmbh"]
+[ext_resource type="Script" uid="uid://h46cb130kp67" path="res://washanim.gd" id="2_6wlw7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6wlw7"]
+radius = 76.595
+
+[sub_resource type="Animation" id="Animation_jvnhh"]
+resource_name = "questing"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.633333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_ydrtn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3m8r0"]
+resource_name = "quest_done"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.333333, 0.633333, 0.933333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2gnw6"]
+_data = {
+&"RESET": SubResource("Animation_ydrtn"),
+&"quest_done": SubResource("Animation_3m8r0"),
+&"questing": SubResource("Animation_jvnhh")
+}
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6wlw7")
+debug_color = Color(0.490196, 0.529412, 0.584314, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6fmbh")
+hframes = 2
+vframes = 2
+script = ExtResource("2_6wlw7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2gnw6")
+}

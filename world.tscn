@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b4q85tg50lb5n"]
+[gd_scene load_steps=27 format=3 uid="uid://b4q85tg50lb5n"]
 
 [ext_resource type="Script" uid="uid://dlaeunmlxshlj" path="res://World.gd" id="1_sie2j"]
 [ext_resource type="Texture2D" uid="uid://cqcqf2kp1sx1" path="res://tilesets/tileset_grassland.png" id="2_kc3mc"]
@@ -15,10 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://btlntd6b7un6a" path="res://spritesheets/pers2.png" id="17_r5lav"]
 [ext_resource type="PackedScene" uid="uid://54er1kef8y35" path="res://pickable_item.tscn" id="18_ikiii"]
 [ext_resource type="Texture2D" uid="uid://bcmmmruq1lx4b" path="res://spritesheets/Screenshot_2023-9-10_205626109.png" id="18_mg2g7"]
+[ext_resource type="Texture2D" uid="uid://bly4tvxyih1dc" path="res://healpotion anim.png" id="19_26xuy"]
 [ext_resource type="Texture2D" uid="uid://bp3wgadb4evlj" path="res://healpotionsanim.png" id="19_dcilf"]
 [ext_resource type="PackedScene" uid="uid://dh2m1f5rfq77i" path="res://landingsun.tscn" id="19_dodp5"]
 [ext_resource type="Texture2D" uid="uid://c8xgb2ruh65we" path="res://Leonardo_Diffusion_XL_pixel_art_house_topdown_front_view_0.png" id="19_he81p"]
 [ext_resource type="PackedScene" uid="uid://df5nlxpat2sgk" path="res://healpotion.tscn" id="19_ymq3t"]
+[ext_resource type="PackedScene" uid="uid://bdbu5fx8dfhoq" path="res://washmashin.tscn" id="21_bc84e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w5fvk"]
 texture = ExtResource("2_kc3mc")
@@ -228,7 +230,6 @@ collision_mask = 24
 
 [node name="Camera2D" type="Camera2D" parent="Pers"]
 zoom = Vector2(2, 2)
-metadata/_edit_lock_ = true
 
 [node name="GridInventory" type="GridInventory" parent="Pers"]
 database = ExtResource("17_ikiii")
@@ -393,6 +394,15 @@ texture = ExtResource("19_he81p")
 [node name="Healpotion" parent="." instance=ExtResource("19_ymq3t")]
 position = Vector2(1079.9, 374.166)
 
+[node name="PickableItem" parent="Healpotion" node_paths=PackedStringArray("player") instance=ExtResource("18_ikiii")]
+position = Vector2(-94.9066, -223.099)
+scale = Vector2(2.76077, 2.84665)
+texture = ExtResource("19_26xuy")
+hframes = 2
+vframes = 2
+inventory_item_id = "HPotion"
+player = NodePath("../../Pers")
+
 [node name="Healpotionsanim" type="Sprite2D" parent="."]
 position = Vector2(992.301, 463.183)
 texture = ExtResource("19_dcilf")
@@ -410,3 +420,6 @@ position = Vector2(851, 165)
 texture = ExtResource("12_32bro")
 inventory_item_id = "sword"
 player = NodePath("../Pers")
+
+[node name="wash_mashin" parent="." instance=ExtResource("21_bc84e")]
+position = Vector2(156.154, 158.528)

@@ -39,5 +39,5 @@ polygon = PackedVector2Array(-1, -27, -26, -28, -26, 33, -5, 55, 29, 30, 29, -17
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_lmeui")
+&"": SubResource("AnimationLibrary_lmeui")
 }

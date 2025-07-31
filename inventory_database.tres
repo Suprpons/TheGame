@@ -1,24 +1,38 @@
-[gd_resource type="InventoryDatabase" load_steps=7 format=3 uid="uid://bpf0bitmhb55p"]
+[gd_resource type="InventoryDatabase" load_steps=10 format=3 uid="uid://bpf0bitmhb55p"]
 
 [ext_resource type="Texture2D" uid="uid://dsqnv7hxxayak" path="res://ITEMs/Key.png" id="1_u2iit"]
 [ext_resource type="Texture2D" uid="uid://dpjfm86nkihhx" path="res://ITEMs/NewSprite321.png" id="2_5jewl"]
+[ext_resource type="Texture2D" uid="uid://dgb82dbue61v" path="res://healpotion anim-1.png" id="3_fwl4f"]
+
+[sub_resource type="ItemCategory" id="ItemCategory_5clex"]
+name = "weapon"
 
 [sub_resource type="ItemDefinition" id="ItemDefinition_lnkph"]
 id = "key"
+max_stack = 1
 name = "Key name"
 icon = ExtResource("1_u2iit")
 
 [sub_resource type="ItemDefinition" id="ItemDefinition_5jewl"]
 id = "sword"
+max_stack = 1
 name = "Sword item name"
 icon = ExtResource("2_5jewl")
+categories = Array[ItemCategory]([SubResource("ItemCategory_5clex")])
 
 [sub_resource type="ItemDefinition" id="ItemDefinition_mkn2f"]
+id = "HPotion"
+max_stack = 1
 name = "New Item definition"
+icon = ExtResource("3_fwl4f")
+
+[sub_resource type="Recipe" id="Recipe_pbcmi"]
 
 [sub_resource type="CraftStationType" id="CraftStationType_u2iit"]
 name = "New Craft Station Type"
 
 [resource]
 items = Array[ItemDefinition]([SubResource("ItemDefinition_lnkph"), SubResource("ItemDefinition_5jewl"), SubResource("ItemDefinition_mkn2f")])
+recipes = Array[Recipe]([SubResource("Recipe_pbcmi")])
 stations_type = Array[CraftStationType]([SubResource("CraftStationType_u2iit")])
+item_categories = Array[ItemCategory]([SubResource("ItemCategory_5clex")])
