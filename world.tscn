@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b4q85tg50lb5n"]
+[gd_scene load_steps=28 format=3 uid="uid://b4q85tg50lb5n"]
 
 [ext_resource type="Script" uid="uid://dlaeunmlxshlj" path="res://World.gd" id="1_sie2j"]
 [ext_resource type="Texture2D" uid="uid://cqcqf2kp1sx1" path="res://tilesets/tileset_grassland.png" id="2_kc3mc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dsqnv7hxxayak" path="res://ITEMs/Key.png" id="5_uuri6"]
 [ext_resource type="PackedScene" uid="uid://dvba1x26o0ot8" path="res://quests/widgets/QuestsPanel.tscn" id="7_cbp6q"]
 [ext_resource type="PackedScene" uid="uid://1dijqt6vr078" path="res://addons/inventory-system-demos/ui/grid/grid_inventory_panel.tscn" id="9_bc84e"]
+[ext_resource type="PackedScene" uid="uid://bdbu5fx8dfhoq" path="res://washmashin.tscn" id="10_wukud"]
 [ext_resource type="Texture2D" uid="uid://dpjfm86nkihhx" path="res://ITEMs/NewSprite321.png" id="12_32bro"]
 [ext_resource type="Texture2D" uid="uid://cqi3j01138p81" path="res://Screenshot 2023-11-30 at 16.19.16 copy.png" id="14_m2fld"]
 [ext_resource type="PackedScene" uid="uid://dtf5hvms31lpo" path="res://NPCs/follower/follower.tscn" id="15_ln5rf"]
@@ -265,6 +266,9 @@ texture = ExtResource("5_uuri6")
 position = Vector2(608, 361)
 scale = Vector2(0.25, 0.225)
 texture = ExtResource("12_32bro")
+
+[node name="Area2D2" parent="." instance=ExtResource("10_wukud")]
+position = Vector2(734.785, 420.049)
 
 [node name="GameOverText" type="RichTextLabel" parent="."]
 visible = false

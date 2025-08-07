@@ -1,0 +1,10 @@
+~ start
+Worried Washing Machine: Oh no! A sneaky Sock Bandit has been stealing one sock from every pair in the village! Now kids are wearing mismatched socks, and it’s chaos! 
+Worried Washing Machine: Can you track down the Bandit and bring back the stolen socks?
+- accept
+	do GameState.accept_quest("they_break", "The Sock Bandit")
+	Worried Washing Machine: Rumor has it, the culprit hides near the Bubble Gum Tree!
+- decline
+	Worried Washing Machine: :(
+Worried Washing Machine: For more information see the online documentation.
+=> END

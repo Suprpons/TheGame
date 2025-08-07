@@ -1,0 +1,15 @@
+[remap]
+
+importer="quest_importer"
+type="Resource"
+uid="uid://bvgq6v37mu7w7"
+path="res://.godot/imported/they_break.quest-e307a77fa4741bec6d422ffb1de1622e.tres"
+
+[deps]
+
+source_file="res://quests/they_break.quest"
+dest_files=["res://.godot/imported/they_break.quest-e307a77fa4741bec6d422ffb1de1622e.tres"]
+
+[params]
+
+defaults=true

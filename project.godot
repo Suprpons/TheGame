@@ -8,7 +8,7 @@
 
 config_version=5
 
-recent_projects=["res://side_quests.quest", "res://quests/first_steps.quest"]
+recent_projects=["res://they_break.quest", "res://side_quests.quest", "res://quests/first_steps.quest"]
 
 [application]
 
@@ -87,7 +87,7 @@ test_action={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://simple_dialog.dialogue")
+locale/translations_pot_files=PackedStringArray("res://simple_dialog.dialogue", "res://washquest.dialogue")
 
 [layer_names]
 

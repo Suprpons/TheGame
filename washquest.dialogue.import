@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://deo0wg6k0d414"
+path="res://.godot/imported/washquest.dialogue-6a922f1a4bdfe5ec9c1fb0418eae737f.tres"
+
+[deps]
+
+source_file="res://washquest.dialogue"
+dest_files=["res://.godot/imported/washquest.dialogue-6a922f1a4bdfe5ec9c1fb0418eae737f.tres"]
+
+[params]
+
+defaults=true

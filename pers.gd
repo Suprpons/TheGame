@@ -93,6 +93,9 @@ func _physics_process(_delta):
   if Input.is_action_just_released("ui_accept") && dialogue_active == false:
     DialogueManager.show_example_dialogue_balloon(load("res://simple_dialog.dialogue"))
     dialogue_active = true
+#  if Input.is_action_just_released("ui_accept") && dialogue_active == false:
+ #   DialogueManager.show_example_dialogue_balloon(load("res://washquest.dialogue"))
+  #  dialogue_active = true
   if Input.is_action_just_released("ui_accept") && dialogue_active == true:
 #    DialogueManager.get_next_dialogue_line(load("res://simple_dialog.dialogue"))
     print(dialogue_active)
