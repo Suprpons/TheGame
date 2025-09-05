@@ -1,7 +1,8 @@
 extends Node
 
 @onready var world = $"/root/World"
-
+@onready var player: Node2D = $"/root/World/Pers"
+var dialogue_active = false
 var choseLife = null
 signal chooseLifeSignal
 
@@ -14,6 +15,7 @@ func _ready():
 #signal step_updated(quest_name)
 #signal new_quest_added(quest_name)
 #signal quest_reset(quest_name)
+  DialogueManager.dialogue_ended.connect(dialogue_close)
   QuestManager.step_complete.connect(_on_step_complete)
   QuestManager.quest_completed.connect(_on_quest_complete)
 
@@ -43,3 +45,11 @@ func accept_quest(resource_name: String, quest_name: String):
     QuestManager.load_quest_resource(resource)
     QuestManager.add_quest(quest_name)
     
+func dialogue_close(resource):
+  await util.wait(0.3)
+  if dialogue_active:
+    dialogue_active = false
+
+func dialogue_open(dialogue_path: String):
+    DialogueManager.show_example_dialogue_balloon(load(dialogue_path))
+    dialogue_active = true

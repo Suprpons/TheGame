@@ -267,8 +267,8 @@ position = Vector2(608, 361)
 scale = Vector2(0.25, 0.225)
 texture = ExtResource("12_32bro")
 
-[node name="Area2D2" parent="." instance=ExtResource("10_wukud")]
-position = Vector2(734.785, 420.049)
+[node name="WashingMachine" parent="." instance=ExtResource("10_wukud")]
+position = Vector2(791, 464)
 
 [node name="GameOverText" type="RichTextLabel" parent="."]
 visible = false

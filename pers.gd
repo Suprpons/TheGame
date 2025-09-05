@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var sp = $Sprite2D
 @onready var inv = $GridInventory
 
-var dialogue_active = false
+#var dialogue_active = false
 var speed = 100  # speed in pixels/sec
 var health := 100
 var current_quest : String = ''
@@ -29,7 +29,7 @@ func _ready() -> void:
     $HealthBar2D.initialize("health_changed", 100)
     emit_signal("health_changed", health)
     damage.connect(on_damage)
-    DialogueManager.dialogue_ended.connect(dialogue_close)
+
     QuestManager.quest_completed.connect(_on_quest_complete)
 
 func _on_quest_complete(quest_name, rewards):
@@ -37,11 +37,7 @@ func _on_quest_complete(quest_name, rewards):
     for key in rewards.keys():
         inv.add(key, rewards[key])
 
-func dialogue_close(resource):
-  await util.wait(0.3)
-  print('hateuworks')
-  if dialogue_active == true:
-    dialogue_active = false
+
   
 
 func on_damage(how_much):
@@ -75,7 +71,7 @@ func _physics_process(_delta):
   velocity = direction * speed
   var x = direction.x
   var y = direction.y
-  if dialogue_active == false:
+  if not GameState.dialogue_active:
     if direction.x > 0:
       sp.flip_h = false
       ap.play("right")
@@ -90,15 +86,12 @@ func _physics_process(_delta):
   if direction.x == 0 and direction.y == 0:
     ap.play("stand")
 
-  if Input.is_action_just_released("ui_accept") && dialogue_active == false:
-    DialogueManager.show_example_dialogue_balloon(load("res://simple_dialog.dialogue"))
-    dialogue_active = true
-#  if Input.is_action_just_released("ui_accept") && dialogue_active == false:
- #   DialogueManager.show_example_dialogue_balloon(load("res://washquest.dialogue"))
-  #  dialogue_active = true
-  if Input.is_action_just_released("ui_accept") && dialogue_active == true:
+  #if Input.is_action_just_released("ui_accept") && not GameState.dialogue_active:
+    #DialogueManager.show_example_dialogue_balloon(load("res://simple_dialog.dialogue"))
+    #GameState.dialogue_active = true
+  #if Input.is_action_just_released("ui_accept") && dialogue_active:
 #    DialogueManager.get_next_dialogue_line(load("res://simple_dialog.dialogue"))
-    print(dialogue_active)
+    #print(dialogue_active)
 #  if DialogueManager.dialogue_ended:
 #    dialogue_close()
   if Input.is_action_just_released("test_action"):

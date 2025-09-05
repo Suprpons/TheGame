@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0uppg2ghkywr"]
+
+[ext_resource type="Script" uid="uid://v6jocak08f4j" path="res://NPCs/quest_giver.gd" id="1_sxi27"]
+
+[node name="QuestGiver" type="Node2D"]
+script = ExtResource("1_sxi27")
