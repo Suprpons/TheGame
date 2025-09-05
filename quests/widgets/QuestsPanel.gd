@@ -20,7 +20,7 @@ func _on_quest_added(quest_name):
     var QuestPanelScene = load("res://quests/widgets/QuestPanel.tscn")
     var quest = QuestManager.get_player_quest(quest_name)
     var current_step = QuestManager.get_current_step(quest_name)
-    
+    print("current step from QuestsPanel", current_step)
     var quest_panel: QuestPanel = QuestPanelScene.instantiate()
     quest_panel.quest = quest
     quest_panel.step = current_step

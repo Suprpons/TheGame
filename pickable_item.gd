@@ -6,7 +6,7 @@ extends Sprite2D
 func _ready():
   pass
 
-func _process(delta):
+func _process(_delta):
   if Input.is_action_just_released("ui_use"):
     if global_position.distance_to(GameState.player.global_position) < distance:
         GameState.pick_item(inventory_item_id)

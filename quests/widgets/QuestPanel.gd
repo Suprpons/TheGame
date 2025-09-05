@@ -6,17 +6,18 @@ var quest: Dictionary = {
     quest_details = "default quest details"
 }
 var step: Dictionary = {
-    details = "default step details"
+    details = "default step details",
+    required = 1
 }
 
 func _ready():
     var quest_name_label = $VBoxContainer/QuestNameLabel
     quest_name_label.text = quest["quest_name"]
     %QuestDescriptionLabel.text = quest["quest_details"]
-    
+    print("step in QuestPanel", step)
     %QuestStep.step_name = step["details"]
     %QuestStep.collected = 0
-    %QuestStep.total_required = 5
+    %QuestStep.total_required = step["required"]
     %QuestStep.render()
     
     QuestManager.step_complete.connect(_on_step_complete)
@@ -30,6 +31,4 @@ func _on_step_complete(step):
 func _on_quest_complete(quest_name, rewards):
     print("quest complete in w", quest_name, "rewards", rewards)
     var quest_name_label = $VBoxContainer/QuestNameLabel
-    quest_name_label.text += " DONE!"
-    
-    %QuestStep.step_name += " DONE!"
+    quest_name_label.text = "[color=green]%s[/color]" % [quest_name_label.text]

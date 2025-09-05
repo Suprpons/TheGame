@@ -225,7 +225,7 @@ occluder = SubResource("OccluderPolygon2D_1noge")
 [node name="Pers" parent="." groups=["Player", "hitable"] instance=ExtResource("2_s275l")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(708, 127)
+position = Vector2(687, 148)
 collision_layer = 24
 collision_mask = 24
 
@@ -268,7 +268,7 @@ scale = Vector2(0.25, 0.225)
 texture = ExtResource("12_32bro")
 
 [node name="WashingMachine" parent="." instance=ExtResource("10_wukud")]
-position = Vector2(791, 464)
+position = Vector2(803, 26)
 
 [node name="GameOverText" type="RichTextLabel" parent="."]
 visible = false
@@ -394,7 +394,7 @@ target = NodePath("../Follower2")
 texture = ExtResource("18_mg2g7")
 
 [node name="Area2D" parent="." instance=ExtResource("19_dodp5")]
-position = Vector2(612, 423)
+position = Vector2(599, 20)
 
 [node name="LeonardoDiffusion house" type="Sprite2D" parent="."]
 position = Vector2(805, 263)
@@ -402,21 +402,21 @@ scale = Vector2(0.800251, 0.825379)
 texture = ExtResource("19_he81p")
 
 [node name="Healpotion" parent="." instance=ExtResource("19_ymq3t")]
-position = Vector2(1079.9, 374.166)
+position = Vector2(643, 197)
 
 [node name="Healpotionsanim" type="Sprite2D" parent="."]
-position = Vector2(992.301, 463.183)
+position = Vector2(685, 36)
 texture = ExtResource("19_dcilf")
 hframes = 2
 vframes = 2
 
 [node name="item_key" parent="." instance=ExtResource("18_ikiii")]
-position = Vector2(913, 161)
+position = Vector2(842, 159)
 texture = ExtResource("5_uuri6")
 inventory_item_id = "key"
 
 [node name="item_sword" parent="." instance=ExtResource("18_ikiii")]
-position = Vector2(858, 158)
+position = Vector2(609, 133)
 texture = ExtResource("12_32bro")
 inventory_item_id = "sword"
 

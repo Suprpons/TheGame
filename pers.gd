@@ -6,6 +6,7 @@ extends CharacterBody2D
 #var dialogue_active = false
 var speed = 100  # speed in pixels/sec
 var health := 100
+const MAX_HEALTH := 100
 
 signal health_changed
 signal kryak
@@ -24,8 +25,8 @@ func hit_particles():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     # Need to be called to use the HealthBar2D
-    $HealthBar2D.initialize("health_changed", 100)
-    emit_signal("health_changed", health)
+    $HealthBar2D.initialize("health_changed", health)
+    health_changed.emit(health)
     damage.connect(on_damage)
     $GridInventoryPanel.request_transfer_to.connect(transfer_to)
 
@@ -50,20 +51,19 @@ func hp_change(howmuch = 10):
     health = health + howmuch
     
     if health <= 0:
-      emit_signal("kryak")
-    if health > 100:
-      health = 100
+      kryak.emit()
+    if health > MAX_HEALTH:
+      health = MAX_HEALTH
       
     print("pers.health: ", health)
-    emit_signal("health_changed", health)
+    health_changed.emit(health)
 
 func _physics_process(_delta):
   if Input.is_action_just_pressed("ui_attack"):
     pass
   var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
   velocity = direction * speed
-  var x = direction.x
-  var y = direction.y
+
   if not GameState.dialogue_active:
     if direction.x > 0:
       sp.flip_h = false
@@ -79,14 +79,6 @@ func _physics_process(_delta):
   if direction.x == 0 and direction.y == 0:
     ap.play("stand")
 
-  #if Input.is_action_just_released("ui_accept") && not GameState.dialogue_active:
-    #DialogueManager.show_example_dialogue_balloon(load("res://simple_dialog.dialogue"))
-    #GameState.dialogue_active = true
-  #if Input.is_action_just_released("ui_accept") && dialogue_active:
-#    DialogueManager.get_next_dialogue_line(load("res://simple_dialog.dialogue"))
-    #print(dialogue_active)
-#  if DialogueManager.dialogue_ended:
-#    dialogue_close()
   if Input.is_action_just_released("test_action"):
     #var current_quest = "find da sord"
     var current_quest = "get da key"
