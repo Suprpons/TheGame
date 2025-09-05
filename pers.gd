@@ -2,12 +2,10 @@ extends CharacterBody2D
 
 @onready var ap = $AnimationPlayer
 @onready var sp = $Sprite2D
-@onready var inv = $GridInventory
 
 #var dialogue_active = false
 var speed = 100  # speed in pixels/sec
 var health := 100
-var current_quest : String = ''
 
 signal health_changed
 signal kryak
@@ -29,16 +27,11 @@ func _ready() -> void:
     $HealthBar2D.initialize("health_changed", 100)
     emit_signal("health_changed", health)
     damage.connect(on_damage)
+    $GridInventoryPanel.request_transfer_to.connect(transfer_to)
 
-    QuestManager.quest_completed.connect(_on_quest_complete)
-
-func _on_quest_complete(quest_name, rewards):
-    print("quest complete in pers", quest_name, "rewards", rewards)
-    for key in rewards.keys():
-        inv.add(key, rewards[key])
-
-
-  
+#signal request_transfer_to(origin_inventory: GridInventory, origin_position: Vector2i, inventory: GridInventory, destination_position : Vector2i, amount : int, is_rotated: bool)
+func transfer_to(inventory: GridInventory, origin_pos: Vector2i, destination: GridInventory, destination_pos: Vector2i, amount: int, is_rotated: bool):
+    inventory.transfer_to(origin_pos, destination, destination_pos, amount, is_rotated)
 
 func on_damage(how_much):
     print("pers.on_damage", how_much)
@@ -95,15 +88,6 @@ func _physics_process(_delta):
 #  if DialogueManager.dialogue_ended:
 #    dialogue_close()
   if Input.is_action_just_released("test_action"):
-    #current_quest = "find da sord"
-    current_quest = "get da key"
+    #var current_quest = "find da sord"
+    var current_quest = "get da key"
     GameState.accept_quest("first_steps", current_quest)
-
-func pick(item_id: String):
-    # check quests needs item
-    QuestManager.progress_quest(current_quest, item_id)
-    game_action("now you need a shield")
-    inv.add(item_id)
-
-func game_action(action: String):
-    QuestManager.progress_quest(current_quest, action)

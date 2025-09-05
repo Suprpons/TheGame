@@ -410,17 +410,15 @@ texture = ExtResource("19_dcilf")
 hframes = 2
 vframes = 2
 
-[node name="item_key" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_ikiii")]
+[node name="item_key" parent="." instance=ExtResource("18_ikiii")]
 position = Vector2(913, 161)
 texture = ExtResource("5_uuri6")
 inventory_item_id = "key"
-player = NodePath("../Pers")
 
-[node name="item_sword" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_ikiii")]
+[node name="item_sword" parent="." instance=ExtResource("18_ikiii")]
 position = Vector2(858, 158)
 texture = ExtResource("12_32bro")
 inventory_item_id = "sword"
-player = NodePath("../Pers")
 
 [node name="FontAwesome" type="Label" parent="."]
 auto_translate_mode = 2
