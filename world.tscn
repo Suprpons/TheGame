@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b4q85tg50lb5n"]
+[gd_scene load_steps=29 format=3 uid="uid://b4q85tg50lb5n"]
 
 [ext_resource type="Script" uid="uid://dlaeunmlxshlj" path="res://World.gd" id="1_sie2j"]
 [ext_resource type="Texture2D" uid="uid://cqcqf2kp1sx1" path="res://tilesets/tileset_grassland.png" id="2_kc3mc"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://df5nlxpat2sgk" path="res://healpotion.tscn" id="19_ymq3t"]
 [ext_resource type="FontFile" uid="uid://dmphmomidbb4l" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="20_bc84e"]
 [ext_resource type="Script" uid="uid://d4eswivtt24yr" path="res://addons/fontawesome/FontAwesome.gd" id="21_wukud"]
+[ext_resource type="Texture2D" uid="uid://8j8iwdau3nii" path="res://ITEMs/apple.png" id="23_il2jm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w5fvk"]
 texture = ExtResource("2_kc3mc")
@@ -416,7 +417,12 @@ texture = ExtResource("5_uuri6")
 inventory_item_id = "key"
 
 [node name="item_sword" parent="." instance=ExtResource("18_ikiii")]
-position = Vector2(609, 133)
+position = Vector2(606, 133)
+texture = ExtResource("12_32bro")
+inventory_item_id = "sword"
+
+[node name="item_sword2" parent="." instance=ExtResource("18_ikiii")]
+position = Vector2(552, 127)
 texture = ExtResource("12_32bro")
 inventory_item_id = "sword"
 
@@ -435,3 +441,8 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("21_wukud")
 metadata/_custom_type_script = "uid://d4eswivtt24yr"
+
+[node name="apple" parent="." instance=ExtResource("18_ikiii")]
+position = Vector2(897, 160)
+texture = ExtResource("23_il2jm")
+inventory_item_id = "apple"

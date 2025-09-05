@@ -45,4 +45,3 @@ fit_content = true
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-step_name = "sdf sdfdsf"

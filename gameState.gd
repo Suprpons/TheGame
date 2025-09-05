@@ -39,8 +39,8 @@ func chooseLifeHandler():
 func _process(_delta):
     pass
 
-func _on_step_complete(step):
-    print("step complete", step)
+func _on_step_complete(step, quest_name):
+    print("GameState._on_step_complete", step)
     
 func accept_quest(resource_name: String, quest_name: String):
     var resource_path = "res://quests/%s.quest" % resource_name
@@ -61,6 +61,7 @@ func dialogue_open(dialogue_path: String):
 
 func pick_item(item_id: String):
     # check quests needs item
+    print("pick_item ", item_id)
     var is_consumed = false
     for quest_name in QuestManager.get_all_player_quests_names():
         var is_consumed_in_quest = QuestManager.progress_quest(quest_name, item_id)
@@ -68,6 +69,7 @@ func pick_item(item_id: String):
             is_consumed = true
             break
     if not is_consumed:
+        print("inv.add ", item_id)
         inv.add(item_id)
 
 func game_event(action: String):
