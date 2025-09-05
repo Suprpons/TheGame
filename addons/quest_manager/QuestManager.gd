@@ -68,21 +68,24 @@ func set_branch_step(quest_name, should_branch:bool=true) -> void:
         
 #Progresses a quest to its next step
 #completes quest if it was at its last step
-func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true, branch:bool=false) -> void:
+func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true, branch:bool=false) -> bool:
     quest_error(quest_name)
     active_quest = quest_name
+    var is_consumed = false
     if is_quest_complete(quest_name):
-        return
+        return is_consumed
     var id = get_player_quest(quest_name).quest_id
     var step = get_current_step(id,true)
     match step.step_type:
         ACTION_STEP:
             get_current_step(id,true).complete = completed
             player_quests[id].next_id = step["next_id"]
+            is_consumed = true
             step_complete.emit(get_current_step(id,true))
         INCREMENTAL_STEP:
             assert(step.item_name == quest_item,"Item: %s invalid" % quest_item)
             get_current_step(id,true).collected += amount
+            is_consumed = true
             step_updated.emit(get_current_step(id,true))
             if step.collected >= step.required:
                 player_quests[id].next_id = step["next_id"]
@@ -92,6 +95,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
                 if item.name == quest_item:
                     item.complete = true
                     step_updated.emit(get_current_step(id,true))
+                    is_consumed = true
                     break
             var missing_items = false
             for item in get_current_step(quest_name).item_list:
@@ -106,7 +110,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
         TIMER_STEP:
             if quest_item != "":
                 #prevents progress quest calls that contains item
-                return
+                return is_consumed
             player_quests[id].next_id = step["next_id"]
             step_complete.emit(get_current_step(id,true))
         #Checks condition and decides if it should branch
@@ -130,6 +134,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
         get_player_quest(id,true).completed = true
         complete_quest(id,true)
         step_updated.emit(step)
+    return is_consumed
 
 #Updates Timer_Steps
 func _process(delta):
