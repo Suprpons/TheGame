@@ -8,7 +8,7 @@
 
 config_version=5
 
-recent_projects=["res://quests/first_steps.quest", "res://they_break.quest", "res://side_quests.quest"]
+recent_projects=["res://quests/they_break.quest", "res://quests/first_steps.quest", "res://side_quests.quest", "res://adventure.quest", "res://they_break.quest"]
 
 [application]
 

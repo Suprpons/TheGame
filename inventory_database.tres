@@ -12,12 +12,14 @@ name = "weapon"
 
 [sub_resource type="ItemDefinition" id="ItemDefinition_lnkph"]
 id = "key"
+can_stack = false
 max_stack = 1
 name = "Key name"
 icon = ExtResource("1_u2iit")
 
 [sub_resource type="ItemDefinition" id="ItemDefinition_5jewl"]
 id = "sword"
+can_stack = false
 max_stack = 1
 name = "Sword item name"
 icon = ExtResource("2_5jewl")
@@ -25,12 +27,15 @@ categories = Array[ItemCategory]([SubResource("ItemCategory_5clex")])
 
 [sub_resource type="ItemDefinition" id="ItemDefinition_mkn2f"]
 id = "HPotion"
+can_stack = false
 max_stack = 1
 name = "just HPotion"
 icon = ExtResource("3_fwl4f")
 
 [sub_resource type="ItemDefinition" id="ItemDefinition_fwl4f"]
 id = "socks"
+can_stack = false
+max_stack = 1
 name = "stolen socks"
 icon = ExtResource("4_pbcmi")
 
@@ -43,6 +48,7 @@ icon = ExtResource("5_ogdxm")
 
 [sub_resource type="ItemDefinition" id="ItemDefinition_ogdxm"]
 id = "gold"
+max_stack = 10
 name = "just gold"
 icon = ExtResource("6_wnxmn")
 
