@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b4q85tg50lb5n"]
+[gd_scene load_steps=29 format=3 uid="uid://b4q85tg50lb5n"]
 
 [ext_resource type="Script" uid="uid://dlaeunmlxshlj" path="res://World.gd" id="1_sie2j"]
 [ext_resource type="Texture2D" uid="uid://cqcqf2kp1sx1" path="res://tilesets/tileset_grassland.png" id="2_kc3mc"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://df5nlxpat2sgk" path="res://healpotion.tscn" id="19_ymq3t"]
 [ext_resource type="FontFile" uid="uid://dmphmomidbb4l" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="20_bc84e"]
 [ext_resource type="Script" uid="uid://d4eswivtt24yr" path="res://addons/fontawesome/FontAwesome.gd" id="21_wukud"]
+[ext_resource type="Texture2D" uid="uid://c5qy0oppec5tb" path="res://socks.png" id="23_il2jm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w5fvk"]
 texture = ExtResource("2_kc3mc")
@@ -208,7 +209,6 @@ layer_1/tile_data = PackedInt32Array(851995, 524288, 0, 524344, 524288, 0, 15073
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="TileMap"]
 occluder = SubResource("OccluderPolygon2D_gy0dm")
-metadata/_edit_lock_ = true
 
 [node name="Location" type="Node2D" parent="."]
 position = Vector2(0, -38)
@@ -231,7 +231,6 @@ collision_mask = 24
 
 [node name="Camera2D" type="Camera2D" parent="Pers"]
 zoom = Vector2(2, 2)
-metadata/_edit_lock_ = true
 
 [node name="GridInventory" type="GridInventory" parent="Pers"]
 database = ExtResource("17_ikiii")
@@ -294,7 +293,6 @@ texture_scale = 1.14
 metadata/use_color_temperature = false
 metadata/color_temperature = 1000
 metadata/color_filter = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
 
 [node name="PointLight2D3" type="PointLight2D" parent="."]
 position = Vector2(615, 269)
@@ -306,7 +304,6 @@ texture_scale = 1.14
 metadata/use_color_temperature = false
 metadata/color_temperature = 1000
 metadata/color_filter = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
 
 [node name="PointLight2D4" type="PointLight2D" parent="."]
 position = Vector2(618, 270)
@@ -318,7 +315,6 @@ texture_scale = 1.14
 metadata/use_color_temperature = false
 metadata/color_temperature = 1000
 metadata/color_filter = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
 
 [node name="PointLight2D5" type="PointLight2D" parent="."]
 position = Vector2(617, 268)
@@ -330,7 +326,6 @@ texture_scale = 1.14
 metadata/use_color_temperature = false
 metadata/color_temperature = 1000
 metadata/color_filter = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
 
 [node name="PointLight2D6" type="PointLight2D" parent="."]
 position = Vector2(617, 269)
@@ -342,7 +337,6 @@ texture_scale = 1.14
 metadata/use_color_temperature = false
 metadata/color_temperature = 1000
 metadata/color_filter = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
 
 [node name="PointLight2D7" type="PointLight2D" parent="."]
 position = Vector2(613, 277)
@@ -354,7 +348,6 @@ texture_scale = 1.14
 metadata/use_color_temperature = false
 metadata/color_temperature = 1000
 metadata/color_filter = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(561, 277)
@@ -366,7 +359,6 @@ texture_scale = 1.14
 metadata/use_color_temperature = false
 metadata/color_temperature = 1000
 metadata/color_filter = Color(1, 1, 1, 0)
-metadata/_edit_lock_ = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-15, -80)
@@ -437,3 +429,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("21_wukud")
 metadata/_custom_type_script = "uid://d4eswivtt24yr"
+
+[node name="item_socks" parent="." node_paths=PackedStringArray("player") instance=ExtResource("18_ikiii")]
+position = Vector2(148.866, 197.728)
+texture = ExtResource("23_il2jm")
+inventory_item_id = "socks"
+player = NodePath("../Pers")
