@@ -2,12 +2,11 @@ extends CharacterBody2D
 
 @onready var ap = $AnimationPlayer
 @onready var sp = $Sprite2D
-@onready var inv = $GridInventory
 
-var dialogue_active = false
+#var dialogue_active = false
 var speed = 100  # speed in pixels/sec
 var health := 100
-var current_quest : String = ''
+const MAX_HEALTH := 100
 
 signal health_changed
 signal kryak
@@ -26,23 +25,14 @@ func hit_particles():
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     # Need to be called to use the HealthBar2D
-    $HealthBar2D.initialize("health_changed", 100)
-    emit_signal("health_changed", health)
+    $HealthBar2D.initialize("health_changed", health)
+    health_changed.emit(health)
     damage.connect(on_damage)
-    DialogueManager.dialogue_ended.connect(dialogue_close)
-    QuestManager.quest_completed.connect(_on_quest_complete)
+    $GridInventoryPanel.request_transfer_to.connect(transfer_to)
 
-func _on_quest_complete(quest_name, rewards):
-    print("quest complete in pers", quest_name, "rewards", rewards)
-    for key in rewards.keys():
-        inv.add(key, rewards[key])
-
-func dialogue_close(resource):
-  await util.wait(0.3)
-  print('hateuworks')
-  if dialogue_active == true:
-    dialogue_active = false
-  
+#signal request_transfer_to(origin_inventory: GridInventory, origin_position: Vector2i, inventory: GridInventory, destination_position : Vector2i, amount : int, is_rotated: bool)
+func transfer_to(inventory: GridInventory, origin_pos: Vector2i, destination: GridInventory, destination_pos: Vector2i, amount: int, is_rotated: bool):
+    inventory.transfer_to(origin_pos, destination, destination_pos, amount, is_rotated)
 
 func on_damage(how_much):
     print("pers.on_damage", how_much)
@@ -61,21 +51,20 @@ func hp_change(howmuch = 10):
     health = health + howmuch
     
     if health <= 0:
-      emit_signal("kryak")
-    if health > 100:
-      health = 100
+      kryak.emit()
+    if health > MAX_HEALTH:
+      health = MAX_HEALTH
       
     print("pers.health: ", health)
-    emit_signal("health_changed", health)
+    health_changed.emit(health)
 
 func _physics_process(_delta):
   if Input.is_action_just_pressed("ui_attack"):
     pass
   var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
   velocity = direction * speed
-  var x = direction.x
-  var y = direction.y
-  if dialogue_active == false:
+
+  if not GameState.dialogue_active:
     if direction.x > 0:
       sp.flip_h = false
       ap.play("right")
@@ -90,27 +79,7 @@ func _physics_process(_delta):
   if direction.x == 0 and direction.y == 0:
     ap.play("stand")
 
-  if Input.is_action_just_released("ui_accept") && dialogue_active == false:
-    DialogueManager.show_example_dialogue_balloon(load("res://simple_dialog.dialogue"))
-    dialogue_active = true
-#  if Input.is_action_just_released("ui_accept") && dialogue_active == false:
- #   DialogueManager.show_example_dialogue_balloon(load("res://washquest.dialogue"))
-  #  dialogue_active = true
-  if Input.is_action_just_released("ui_accept") && dialogue_active == true:
-#    DialogueManager.get_next_dialogue_line(load("res://simple_dialog.dialogue"))
-    print(dialogue_active)
-#  if DialogueManager.dialogue_ended:
-#    dialogue_close()
   if Input.is_action_just_released("test_action"):
-    #current_quest = "find da sord"
-    current_quest = "get da key"
+    #var current_quest = "find da sord"
+    var current_quest = "get da key"
     GameState.accept_quest("first_steps", current_quest)
-
-func pick(item_id: String):
-    # check quests needs item
-    QuestManager.progress_quest(current_quest, item_id)
-    game_action("now you need a shield")
-    inv.add(item_id)
-
-func game_action(action: String):
-    QuestManager.progress_quest(current_quest, action)

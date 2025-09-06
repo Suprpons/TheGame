@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://e2fkhon8pqp2"]
+[gd_scene load_steps=4 format=3 uid="uid://e2fkhon8pqp2"]
 
 [ext_resource type="Script" uid="uid://dfiri3661uhpn" path="res://quests/widgets/QuestStep.gd" id="1_0ibjt"]
+[ext_resource type="FontFile" uid="uid://dmphmomidbb4l" path="res://addons/fontawesome/fonts/fa-solid-900.woff2" id="2_k0x6f"]
+[ext_resource type="Script" uid="uid://d4eswivtt24yr" path="res://addons/fontawesome/FontAwesome.gd" id="3_5skkf"]
 
 [node name="QuestStep" type="Panel"]
 custom_minimum_size = Vector2(200, 0)
@@ -18,11 +20,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CheckBox" type="CheckBox" parent="HBoxContainer"]
-unique_name_in_owner = true
+[node name="FontAwesome" type="Label" parent="HBoxContainer"]
+auto_translate_mode = 2
+visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 10
-button_pressed = true
+localize_numeral_system = false
+theme_override_fonts/font = ExtResource("2_k0x6f")
+theme_override_font_sizes/font_size = 16
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_5skkf")
+icon_name = "circle-check"
+metadata/_custom_type_script = "uid://d4eswivtt24yr"
 
 [node name="StepTextLabel" type="RichTextLabel" parent="HBoxContainer"]
 unique_name_in_owner = true

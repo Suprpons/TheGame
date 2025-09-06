@@ -1,9 +1,11 @@
-[gd_resource type="InventoryDatabase" load_steps=12 format=3 uid="uid://bpf0bitmhb55p"]
+[gd_resource type="InventoryDatabase" load_steps=16 format=3 uid="uid://bpf0bitmhb55p"]
 
 [ext_resource type="Texture2D" uid="uid://dsqnv7hxxayak" path="res://ITEMs/Key.png" id="1_u2iit"]
 [ext_resource type="Texture2D" uid="uid://dpjfm86nkihhx" path="res://ITEMs/NewSprite321.png" id="2_5jewl"]
 [ext_resource type="Texture2D" uid="uid://dgb82dbue61v" path="res://healpotion anim-1.png" id="3_fwl4f"]
 [ext_resource type="Texture2D" uid="uid://c5qy0oppec5tb" path="res://socks.png" id="4_pbcmi"]
+[ext_resource type="Texture2D" uid="uid://8j8iwdau3nii" path="res://ITEMs/apple.png" id="5_ogdxm"]
+[ext_resource type="Texture2D" uid="uid://b2gk0pmxteh1c" path="res://ITEMs/gold-icon.png" id="6_wnxmn"]
 
 [sub_resource type="ItemCategory" id="ItemCategory_5clex"]
 name = "weapon"
@@ -24,7 +26,7 @@ categories = Array[ItemCategory]([SubResource("ItemCategory_5clex")])
 [sub_resource type="ItemDefinition" id="ItemDefinition_mkn2f"]
 id = "HPotion"
 max_stack = 1
-name = "New Item definition"
+name = "just HPotion"
 icon = ExtResource("3_fwl4f")
 
 [sub_resource type="ItemDefinition" id="ItemDefinition_fwl4f"]
@@ -32,13 +34,25 @@ id = "socks"
 name = "stolen socks"
 icon = ExtResource("4_pbcmi")
 
+[sub_resource type="ItemDefinition" id="ItemDefinition_pbcmi"]
+id = "apple"
+can_stack = false
+max_stack = 1
+name = "just apple"
+icon = ExtResource("5_ogdxm")
+
+[sub_resource type="ItemDefinition" id="ItemDefinition_ogdxm"]
+id = "gold"
+name = "just gold"
+icon = ExtResource("6_wnxmn")
+
 [sub_resource type="Recipe" id="Recipe_pbcmi"]
 
 [sub_resource type="CraftStationType" id="CraftStationType_u2iit"]
 name = "New Craft Station Type"
 
 [resource]
-items = Array[ItemDefinition]([SubResource("ItemDefinition_lnkph"), SubResource("ItemDefinition_5jewl"), SubResource("ItemDefinition_mkn2f"), SubResource("ItemDefinition_fwl4f")])
+items = Array[ItemDefinition]([SubResource("ItemDefinition_lnkph"), SubResource("ItemDefinition_5jewl"), SubResource("ItemDefinition_mkn2f"), SubResource("ItemDefinition_fwl4f"), SubResource("ItemDefinition_pbcmi"), SubResource("ItemDefinition_ogdxm")])
 recipes = Array[Recipe]([SubResource("Recipe_pbcmi")])
 stations_type = Array[CraftStationType]([SubResource("CraftStationType_u2iit")])
 item_categories = Array[ItemCategory]([SubResource("ItemCategory_5clex")])

@@ -1,10 +1,10 @@
 @tool
 extends Node
 
-signal quest_completed(quest_name)
+signal quest_completed(quest_name, rewards)
 signal quest_failed(quest_name)
-signal step_complete(quest_name)
-signal step_updated(quest_name)
+signal step_complete(step, quest_name)
+signal step_updated(step, quest_name)
 signal new_quest_added(quest_name)
 signal quest_reset(quest_name)
 
@@ -68,47 +68,51 @@ func set_branch_step(quest_name, should_branch:bool=true) -> void:
         
 #Progresses a quest to its next step
 #completes quest if it was at its last step
-func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true, branch:bool=false) -> void:
+func progress_quest(quest_name:String, quest_item:String="",amount:int=1,completed:bool=true, branch:bool=false) -> bool:
     quest_error(quest_name)
     active_quest = quest_name
+    var is_consumed = false
     if is_quest_complete(quest_name):
-        return
+        return is_consumed
     var id = get_player_quest(quest_name).quest_id
     var step = get_current_step(id,true)
     match step.step_type:
         ACTION_STEP:
             get_current_step(id,true).complete = completed
             player_quests[id].next_id = step["next_id"]
-            step_complete.emit(get_current_step(id,true))
+            is_consumed = true
+            step_complete.emit(get_current_step(id,true), quest_name)
         INCREMENTAL_STEP:
             assert(step.item_name == quest_item,"Item: %s invalid" % quest_item)
             get_current_step(id,true).collected += amount
-            step_updated.emit(get_current_step(id,true))
+            is_consumed = true
+            step_updated.emit(get_current_step(id,true), quest_name)
             if step.collected >= step.required:
                 player_quests[id].next_id = step["next_id"]
-                step_complete.emit(get_current_step(id,true))
+                step_complete.emit(get_current_step(id,true), quest_name)
         ITEMS_STEP:
             for item in get_current_step(id,true).item_list:
                 if item.name == quest_item:
                     item.complete = true
-                    step_updated.emit(get_current_step(id,true))
+                    step_updated.emit(get_current_step(id,true), quest_name)
+                    is_consumed = true
                     break
             var missing_items = false
             for item in get_current_step(quest_name).item_list:
                 if item.complete == false:
                     missing_items = true
-                    step_updated.emit(get_current_step(id,true))
+                    step_updated.emit(get_current_step(id,true), quest_name)
                     break
             if missing_items == false:
                 get_current_step(id,true).complete = true
                 player_quests[id].next_id = step["next_id"]
-                step_complete.emit(get_current_step(id,true))
+                step_complete.emit(get_current_step(id,true), quest_name)
         TIMER_STEP:
             if quest_item != "":
                 #prevents progress quest calls that contains item
-                return
+                return is_consumed
             player_quests[id].next_id = step["next_id"]
-            step_complete.emit(get_current_step(id,true))
+            step_complete.emit(get_current_step(id,true), quest_name)
         #Checks condition and decides if it should branch
         BRANCH_STEP:
             if get_current_step(id,true).branch == false:
@@ -116,7 +120,7 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
             else:
                 player_quests[id].next_id = get_current_step(id,true)["branch_step_id"]
             get_current_step(id,true)["complete"] = true
-            step_complete.emit(get_current_step(id,true))
+            step_complete.emit(get_current_step(id,true), quest_name)
     #get updated step
     step = get_current_step(id,true)
     #call function if the step is a callable step then move to next function
@@ -124,12 +128,13 @@ func progress_quest(quest_name:String, quest_item:String="",amount:int=1,complet
         call_function(step.callable,step.params["funcparams"])
         get_current_step(id,true)["complete"] = true
         player_quests[id].next_id = step["next_id"]
-        step_complete.emit(get_current_step(id,true))
+        step_complete.emit(get_current_step(id,true), quest_name)
     #Ends the quest
     if step.step_type == END:
         get_player_quest(id,true).completed = true
         complete_quest(id,true)
-        step_updated.emit(step)
+        step_updated.emit(step, quest_name)
+    return is_consumed
 
 #Updates Timer_Steps
 func _process(delta):
@@ -158,7 +163,7 @@ func _process(delta):
                     else:
                         progress_quest(player_quests[quest].quest_name)
                         
-            step_updated.emit(step)
+            step_updated.emit(step, player_quests[quest].quest_name)
     if counter >= 1.0:
         counter = 0
     
@@ -178,8 +183,8 @@ func set_quest_step_items(quest_name:String,quest_item:String,amount:int=0,colle
             for item in step.item_list:
                 if item.name == quest_item:
                     get_current_step(quest_name).complete = collected
-                    step_updated.emit(get_current_step(quest_name))
-    step_updated.emit(step)
+                    step_updated.emit(get_current_step(quest_name), quest_name)
+    step_updated.emit(step, quest_name)
 
 #Optionally get quests that were grouped by group name grouped to all by default
 func get_quest_list(quest_resource:QuestResource=current_resource, group:String="") -> Dictionary:
@@ -264,10 +269,11 @@ func get_quest_rewards(quest_name:String,id_id:bool=false) -> Dictionary:
 func complete_quest(quest_name:String,is_id:bool = false) -> void:
     if is_id:
         player_quests[quest_name].completed = true
+        quest_completed.emit(player_quests[quest_name].quest_name, get_quest_rewards(quest_name,is_id))
     else:
         get_player_quest(quest_name).completed = true
-    #emits quest name and rewards dictionary
-    quest_completed.emit(quest_name,get_quest_rewards(quest_name,is_id))
+        #emits quest name and rewards dictionary
+        quest_completed.emit(quest_name,get_quest_rewards(quest_name,is_id))
 
 #get all the meta data stored for this quest
 func get_meta_data(quest_name:String) -> Dictionary:

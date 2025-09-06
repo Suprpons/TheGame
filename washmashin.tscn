@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdbu5fx8dfhoq"]
+[gd_scene load_steps=9 format=3 uid="uid://bdbu5fx8dfhoq"]
 
 [ext_resource type="Texture2D" uid="uid://cyv1fgujnogin" path="res://washmashinfull.png" id="1_6fmbh"]
 [ext_resource type="Script" uid="uid://h46cb130kp67" path="res://washanim.gd" id="2_6wlw7"]
+[ext_resource type="PackedScene" uid="uid://d0uppg2ghkywr" path="res://NPCs/quest_giver.tscn" id="3_jvnhh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6wlw7"]
 radius = 76.595
@@ -78,3 +79,6 @@ script = ExtResource("2_6wlw7")
 libraries = {
 &"": SubResource("AnimationLibrary_2gnw6")
 }
+
+[node name="quest_giver" parent="." instance=ExtResource("3_jvnhh")]
+dialogue_path = "res://washquest.dialogue"
