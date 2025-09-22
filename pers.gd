@@ -15,7 +15,6 @@ const MAX_HEALTH := 100
 signal health_changed
 signal kryak
 signal damage(how_much)
-signal heal(how_much)
 
 
 var timer : Timer
