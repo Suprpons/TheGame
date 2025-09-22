@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var ap = $AnimationPlayer
 @onready var sp = $Sprite2D
 
+
+var current_anim = "stand"
 #var dialogue_active = false
 var speed = 100  # speed in pixels/sec
 var health := 100
@@ -63,18 +65,21 @@ func _physics_process(_delta):
     pass
   var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
   velocity = direction * speed
-
+  var new_animation = ''
   if not GameState.dialogue_active:
     if direction.x > 0:
       sp.flip_h = false
-      ap.play("right")
+      new_animation = "right"
     if direction.x < 0:
       sp.flip_h = true
-      ap.play("right")
+      new_animation = "right"
     if direction.y > 0:
-      ap.play("down")
+      new_animation = "down"
     if direction.y < 0:
-      ap.play("up")
+      new_animation = "up"
+    if new_animation != current_anim:
+        current_anim = new_animation
+        ap.play(current_anim)  
     move_and_slide()
   if direction.x == 0 and direction.y == 0:
     ap.play("stand")
