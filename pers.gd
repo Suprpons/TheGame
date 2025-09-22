@@ -10,6 +10,8 @@ var speed = 100  # speed in pixels/sec
 var health := 100
 const MAX_HEALTH := 100
 
+
+
 signal health_changed
 signal kryak
 signal damage(how_much)
@@ -64,6 +66,10 @@ func _physics_process(_delta):
   if Input.is_action_just_pressed("ui_attack"):
     pass
   var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+  if Input.is_action_pressed("run"):
+    speed = 130
+  else:
+    speed = 100
   velocity = direction * speed
   var new_animation = ''
   if not GameState.dialogue_active:
@@ -88,3 +94,4 @@ func _physics_process(_delta):
     #var current_quest = "find da sord"
     var current_quest = "get da key"
     GameState.accept_quest("first_steps", current_quest)
+  
