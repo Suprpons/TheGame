@@ -15,6 +15,7 @@ const MAX_HEALTH := 100
 signal health_changed
 signal kryak
 signal damage(how_much)
+signal heal(how_much)
 
 
 var timer : Timer
@@ -42,7 +43,7 @@ func on_damage(how_much):
     print("pers.on_damage", how_much)
     hp_change(how_much)
     hit_particles()
-    
+
     
 func flash():
     hp_change(-10)
@@ -94,4 +95,5 @@ func _physics_process(_delta):
     #var current_quest = "find da sord"
     var current_quest = "get da key"
     GameState.accept_quest("first_steps", current_quest)
-  
+  if Input.is_action_just_pressed('ui_heal'):
+    hp_change(10)
